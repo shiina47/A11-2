@@ -13,7 +13,7 @@ from django.conf import settings
 
 def upload_recipe_path(instance, filename):
     ext = filename.split('.')[-1]
-    return '/'.join('resipe', str(instance.user_id.id)+str(instance.title)+str(".")+str(ext))
+    return '/'.join(['resipe', str(instance.user_id.id)+str(instance.title)+str(".")+str(ext)])
 
 
 class UserManager(BaseUserManager):
@@ -34,6 +34,7 @@ class UserManager(BaseUserManager):
 
         return user
 
+
 class User(AbstractBaseUser, PermissionsMixin):
 
     email = models.EmailField(max_length=50, unique=True)
@@ -47,33 +48,36 @@ class User(AbstractBaseUser, PermissionsMixin):
     def __str__(self):
         return self.email
 
+
 class Recipe(models.Model):
 
     title = models.CharField(max_length=50)
-    cost = models.CharField(max_length=30)
+    cost = models.PositiveIntegerField()
     minutes = models.PositiveIntegerField()
     image = models.ImageField(blank=True, null=True, upload_to=upload_recipe_path)
-    user_id = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now_add=True)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.title
+
 
 class Process(models.Model):
 
     order = models.PositiveIntegerField()
     how_to = models.TextField(max_length=400)
-    recipe_id = models.ForeignKey(Recipe, on_delete=models.CASCADE)
+    recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.order
+
 
 class Material(models.Model):
 
     name = models.CharField(max_length=50)
     amount = models.CharField(max_length=20)
-    recipe_id = models.ForeignKey(Recipe, on_delete=models.CASCADE)
+    recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.name
