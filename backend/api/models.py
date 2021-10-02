@@ -15,9 +15,11 @@ def upload_recipe_path(instance, filename):
     ext = filename.split('.')[-1]
     return '/'.join(['recipe', str(instance.user.id)+str(instance.title)+str(".")+str(ext)])
 
+
 def upload_user_path(instance, filename):
     ext = filename.split('.')[-1]
     return '/'.join(['user', str(instance.user.id)+str(instance.name)+str(".")+str(ext)])
+
 
 class UserManager(BaseUserManager):
     def create_user(self, email, password=None):
@@ -33,7 +35,7 @@ class UserManager(BaseUserManager):
         user = self.create_user(email, password)
         user.is_staff = True
         user.is_superuser = True
-        user.save(using= self._db)
+        user.save(using=self._db)
 
         return user
 
@@ -51,21 +53,27 @@ class User(AbstractBaseUser, PermissionsMixin):
     def __str__(self):
         return self.email
 
+
 class MyPage(models.Model):
 
     name = models.CharField(max_length=20)
-    userPage = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    image = models.ImageField(blank=True, null=True, upload_to=upload_user_path)
+    userPage = models.OneToOneField(
+        settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    image = models.ImageField(blank=True, null=True,
+                              upload_to=upload_user_path)
+
 
 class Recipe(models.Model):
 
     title = models.CharField(max_length=50)
     cost = models.PositiveIntegerField()
     minutes = models.PositiveIntegerField()
-    image = models.ImageField(blank=True, null=True, upload_to=upload_recipe_path)
+    image = models.ImageField(blank=True, null=True,
+                              upload_to=upload_recipe_path)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now_add=True)
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL,
+                             on_delete=models.CASCADE)
 
     def __str__(self):
         return self.title
@@ -75,17 +83,19 @@ class Process(models.Model):
 
     order = models.PositiveIntegerField()
     how_to = models.TextField(max_length=400)
-    recipe = models.ForeignKey(Recipe, related_name='process', on_delete=models.CASCADE)
+    recipe = models.ForeignKey(
+        Recipe, related_name='process', on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.how_to
+        return "%d. %s" % (self.order, self.how_to)
 
 
 class Material(models.Model):
 
     name = models.CharField(max_length=50)
     amount = models.CharField(max_length=20)
-    recipe = models.ForeignKey(Recipe, related_name='material', on_delete=models.CASCADE)
+    recipe = models.ForeignKey(
+        Recipe, related_name='material', on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.name
+        return "%s: %s" % (self.name, self.amount)
