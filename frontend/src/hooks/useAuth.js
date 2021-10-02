@@ -15,7 +15,7 @@ export const useAuth = () => {
         })
         .then((res) => {
           localStorage.setItem("localJWT", res.data.access);
-          history.push("/top");
+          history.push("/recipes");
         })
         .catch(() => {
           alert("ログインできません");
