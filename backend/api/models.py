@@ -75,17 +75,17 @@ class Process(models.Model):
 
     order = models.PositiveIntegerField()
     how_to = models.TextField(max_length=400)
-    recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE)
+    recipe = models.ForeignKey(Recipe, related_name='process', on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.order
+        return self.how_to
 
 
 class Material(models.Model):
 
     name = models.CharField(max_length=50)
     amount = models.CharField(max_length=20)
-    recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE)
+    recipe = models.ForeignKey(Recipe, related_name='material', on_delete=models.CASCADE)
 
     def __str__(self):
         return self.name

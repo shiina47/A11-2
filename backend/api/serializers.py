@@ -13,6 +13,7 @@ class UserSerializer(serializers.ModelSerializer):
         user = get_user_model().objects.create_user(**validated_data)
         return user
 
+
 class MyPageSerializer(serializers.ModelSerializer):
 
     created_at = serializers.DateTimeField(format="%Y-%m-%d", read_only=True)
@@ -22,16 +23,23 @@ class MyPageSerializer(serializers.ModelSerializer):
         fields = '__all__'
         extra_kwargs = {'userPage': {'read_only': True}}
 
+
 class RecipeSerializer(serializers.ModelSerializer):
 
     created_at = serializers.DateTimeField(format="%Y-%m-%d", read_only=True)
     updated_at = serializers.DateTimeField(format="%Y-%m-%d", read_only=True)
     user = UserSerializer()
 
+    material = serializers.StringRelatedField(many=True)
+    process = serializers.StringRelatedField(many=True)
+
     class Meta:
         model = Recipe
-        fields = '__all__'
-        extra_kwargs = {'user': {'read_only': True}}
+
+
+extra_kwargs = {'user': {'read_only': True}}
+fields = ('title', 'cost', 'minutes', 'image',
+          'created_at', 'updated_at', 'material', 'process')
 
 
 class ProcessSerializer(serializers.ModelSerializer):
