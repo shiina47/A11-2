@@ -1,26 +1,71 @@
 import { memo, useState } from "react";
-import { TextField } from "@mui/material";
+import { TextField, Box, Button, Stack } from "@mui/material";
 
 export const Post = memo(() => {
-  const [recipe, setRecipe] = useState({
+  const [recipeForm, setRecipeForm] = useState({
     title: "",
-    cost: 0,
-    minutes: 0,
-    image: null,
+    cost: "",
+    minutes: "",
+    image: "",
   });
+
+  const [materialContents, setMaterialContents] = useState([]);
+
+  const handleChange = (event) => {
+    setRecipeForm({ ...recipeForm, [event.target.name]: event.target.value });
+  };
+
+  const onSubmit = () => {
+    console.log(recipeForm);
+  };
+
   return (
     <>
-      <div>
+      <Box mx="auto" width={300}>
         <p>レシピ投稿</p>
-        <TextField label="title" />
-        <TextField label="cost" />
-        <TextField label="minutes" />
-        <input type="file" />
-        <br />
-        <TextField label="material" />
-        <br />
-        <TextField label="process" />
-      </div>
+        <Box>
+          <Stack spacing={2}>
+            <TextField
+              label="title"
+              name="title"
+              value={recipeForm.title}
+              onChange={handleChange}
+            />
+            <TextField
+              label="cost"
+              name="cost"
+              value={recipeForm.cost}
+              onChange={handleChange}
+            />
+            <TextField
+              label="minutes"
+              name="minutes"
+              value={recipeForm.minutes}
+              onChange={handleChange}
+            />
+            <input type="file" name="image" onChange={handleChange} />
+          </Stack>
+        </Box>
+
+        <Box mt={2} display="flex" flexDirection="column">
+          <TextField label="material" />
+          <Box mt={1}>
+            <Button variant="contained">追加する</Button>
+          </Box>
+        </Box>
+
+        <Box mt={2} display="flex" flexDirection="column">
+          <TextField label="process" />
+          <Box mt={1}>
+            <Button variant="contained">追加する</Button>
+          </Box>
+        </Box>
+        <Box mt={4}>
+          <Button onClick={onSubmit} variant="contained">
+            投稿する
+          </Button>
+        </Box>
+      </Box>
     </>
   );
 });
