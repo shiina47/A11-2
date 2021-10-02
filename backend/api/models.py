@@ -13,8 +13,11 @@ from django.conf import settings
 
 def upload_recipe_path(instance, filename):
     ext = filename.split('.')[-1]
-    return '/'.join(['resipe', str(instance.user_id.id)+str(instance.title)+str(".")+str(ext)])
+    return '/'.join(['recipe', str(instance.user.id)+str(instance.title)+str(".")+str(ext)])
 
+def upload_user_path(instance, filename):
+    ext = filename.split('.')[-1]
+    return '/'.join(['user', str(instance.user.id)+str(instance.name)+str(".")+str(ext)])
 
 class UserManager(BaseUserManager):
     def create_user(self, email, password=None):
@@ -48,6 +51,11 @@ class User(AbstractBaseUser, PermissionsMixin):
     def __str__(self):
         return self.email
 
+class MyPage(models.Model):
+
+    name = models.CharField(max_length=20)
+    userPage = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    image = models.ImageField(blank=True, null=True, upload_to=upload_user_path)
 
 class Recipe(models.Model):
 
