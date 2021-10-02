@@ -28,7 +28,6 @@ class RecipeSerializer(serializers.ModelSerializer):
 
     created_at = serializers.DateTimeField(format="%Y-%m-%d", read_only=True)
     updated_at = serializers.DateTimeField(format="%Y-%m-%d", read_only=True)
-    user = UserSerializer()
 
     material = serializers.StringRelatedField(many=True)
     process = serializers.StringRelatedField(many=True)
@@ -36,15 +35,12 @@ class RecipeSerializer(serializers.ModelSerializer):
     class Meta:
         model = Recipe
 
-
-extra_kwargs = {'user': {'read_only': True}}
-fields = ('title', 'cost', 'minutes', 'image',
-          'created_at', 'updated_at', 'material', 'process')
+        extra_kwargs = {'user': {'read_only': True}}
+        fields = ('title', 'cost', 'minutes', 'image', 'user',
+                  'created_at', 'updated_at', 'material', 'process')
 
 
 class ProcessSerializer(serializers.ModelSerializer):
-
-    recipe = RecipeSerializer()
 
     class Meta:
         model = Process
@@ -52,8 +48,6 @@ class ProcessSerializer(serializers.ModelSerializer):
 
 
 class MaterialSerializer(serializers.ModelSerializer):
-
-    recipe = RecipeSerializer()
 
     class Meta:
         model = Material
