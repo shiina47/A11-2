@@ -19,9 +19,12 @@ class RecipeSerializer(serializers.ModelSerializer):
     created_at = serializers.DateTimeField(format="%Y-%m-%d", read_only=True)
     updated_at = serializers.DateTimeField(format="%Y-%m-%d", read_only=True)
 
+    material = serializers.StringRelatedField(many=True)
+    process = serializers.StringRelatedField(many=True)
+
     class Meta:
         model = Recipe
-        fields = '__all__'
+        fields = ('title', 'cost', 'minutes', 'image', 'created_at', 'updated_at', 'material', 'process')
         extra_kwargs = {'user_id': {'read_only': True}}
 
 
