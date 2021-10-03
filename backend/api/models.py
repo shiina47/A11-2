@@ -67,6 +67,7 @@ class Recipe(models.Model):
 
     title = models.CharField(max_length=50)
     cost = models.PositiveIntegerField()
+    amount = models.PositiveIntegerField(default=1)
     minutes = models.PositiveIntegerField()
     image = models.ImageField(blank=True, null=True,
                               upload_to=upload_recipe_path)
