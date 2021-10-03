@@ -13,19 +13,32 @@ export default function Switch() {
 
 
   return (
-    <Box>
+    <Box sx={{ display: "flex" ,justifyContent: "center" }}>
+      <Box sx={{ height: "600px" , width: "300px" , display: "flex" , flexDirection: "column", alignItems: "center"}}>
       {
         (() => {
           if (switchLogin === false){
-            return <Register/>
+            return<Box> 
+                <Register/>
+                <Box sx={{display:"flex" , justifyContent: "center"}}>
+                  <Button onClick={onClickSwitchLogin}>
+                    登録済みの方
+                  </Button>
+                </Box>
+            </Box>
           }else{
-            return<Login/>  
+            return<Box sx={{alignItems: "center"}}> 
+              <Login/>
+              <Box sx={{display:"flex" , justifyContent: "center"}}>
+                <Button onClick={onClickSwitchLogin}>
+                  新規登録
+                </Button>
+              </Box>
+            </Box>
           }
         })()
-    }
-      <Button onClick={onClickSwitchLogin}>
-        登録済みの方
-      </Button>  
+      }
+      </Box>
     </Box>  
   )
 };
