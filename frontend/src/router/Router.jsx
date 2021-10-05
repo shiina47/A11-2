@@ -6,15 +6,21 @@ import { Auth } from "../components/pages/Auth";
 import { RecipeDisplay } from "../components/pages/RecipeDisplay";
 import { Post } from "../components/pages/Post";
 import { MyPage } from "../components/pages/MyPage";
+import { NotFound } from "../components/pages/NotFound";
+import { Header } from "../components/pages/Header";
 
 export const Router = memo(() => {
   return (
-    <Switch>
-      <Route exact path="/" component={Top} />
-      <Route exact path="/auth" component={Auth} />
-      <Route exact path="/recipes" component={RecipeDisplay} />
-      <Route exact path="/post" component={Post} />
-      <Route exact path="/mypage" component={MyPage} />
-    </Switch>
+    <>
+      <Header />
+      <Switch>
+        <Route exact path="/" component={Top} />
+        <Route exact path="/auth" component={Auth} />
+        <Route exact path="/recipes" component={RecipeDisplay} />
+        <Route exact path="/post" component={Post} />
+        <Route exact path="/mypage" component={MyPage} />
+        <Route component={NotFound} />
+      </Switch>
+    </>
   );
 });
