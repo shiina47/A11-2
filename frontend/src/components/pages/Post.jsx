@@ -2,6 +2,7 @@ import { memo, useState } from "react";
 import { TextField, Box, Button, Stack } from "@mui/material";
 
 export const Post = memo(() => {
+  console.log("レンダリング");
   const [recipeForm, setRecipeForm] = useState({
     title: "",
     cost: "",
@@ -9,8 +10,41 @@ export const Post = memo(() => {
     image: "",
   });
 
-  const [materialContents, setMaterialContents] = useState([]);
+  const [materialCount, setMaterialCount] = useState(1);
+  const [processCount, setProcessCount] = useState(2);
 
+  // material の text field
+  let materialList = [];
+  for (let i = 0; i < materialCount; i++) {
+    materialList.push(
+      <TextField
+        inputProps={{
+          autoComplete: "off",
+        }}
+        label="material"
+        variant="outlined"
+        key={i}
+      />
+    );
+  }
+  const onClickIncrementMaterial = () => setMaterialCount((pre) => pre + 1);
+
+  // process の text field
+  let processlList = [];
+  for (let i = 1; i < processCount; i++) {
+    processlList.push(
+      <TextField
+        label="process"
+        multiline
+        rows={2}
+        variant="outlined"
+        key={-i}
+      />
+    );
+  }
+  const onClickIncrementProcess = () => setProcessCount((pre) => pre + 1);
+
+  // recipe form のstate関連
   const handleChange = (event) => {
     setRecipeForm({ ...recipeForm, [event.target.name]: event.target.value });
   };
@@ -25,6 +59,7 @@ export const Post = memo(() => {
         <p>レシピ投稿</p>
         <Box>
           <Stack spacing={2}>
+            <input type="file" name="image" onChange={handleChange} />
             <TextField
               label="title"
               name="title"
@@ -43,21 +78,24 @@ export const Post = memo(() => {
               value={recipeForm.minutes}
               onChange={handleChange}
             />
-            <input type="file" name="image" onChange={handleChange} />
           </Stack>
         </Box>
 
         <Box mt={2} display="flex" flexDirection="column">
-          <TextField label="material" />
+          {materialList}
           <Box mt={1}>
-            <Button variant="contained">追加する</Button>
+            <Button variant="contained" onClick={onClickIncrementMaterial}>
+              追加する
+            </Button>
           </Box>
         </Box>
 
         <Box mt={2} display="flex" flexDirection="column">
-          <TextField label="process" />
+          {processlList}
           <Box mt={1}>
-            <Button variant="contained">追加する</Button>
+            <Button variant="contained" onClick={onClickIncrementProcess}>
+              追加する
+            </Button>
           </Box>
         </Box>
         <Box mt={4}>
