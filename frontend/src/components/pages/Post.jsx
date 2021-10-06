@@ -1,5 +1,7 @@
 import { memo, useState } from "react";
 import { TextField, Box, Button, Stack } from "@mui/material";
+import { TextFieldMaterial } from "../atoms/TextFieldMaterial";
+import { TextFieldProcess } from "../atoms/TextFieldProcess";
 
 export const Post = memo(() => {
   console.log("レンダリング");
@@ -10,39 +12,8 @@ export const Post = memo(() => {
     image: "",
   });
 
-  const [materialCount, setMaterialCount] = useState(1);
-  const [processCount, setProcessCount] = useState(2);
-
-  // material の text field
-  let materialList = [];
-  for (let i = 0; i < materialCount; i++) {
-    materialList.push(
-      <TextField
-        inputProps={{
-          autoComplete: "off",
-        }}
-        label="material"
-        variant="outlined"
-        key={i}
-      />
-    );
-  }
-  const onClickIncrementMaterial = () => setMaterialCount((pre) => pre + 1);
-
-  // process の text field
-  let processlList = [];
-  for (let i = 1; i < processCount; i++) {
-    processlList.push(
-      <TextField
-        label="process"
-        multiline
-        rows={2}
-        variant="outlined"
-        key={-i}
-      />
-    );
-  }
-  const onClickIncrementProcess = () => setProcessCount((pre) => pre + 1);
+  const [materials, setMaterials] = useState([]);
+  const [processes, setProcesses] = useState([]);
 
   // recipe form のstate関連
   const handleChange = (event) => {
@@ -51,6 +22,8 @@ export const Post = memo(() => {
 
   const onSubmit = () => {
     console.log(recipeForm);
+    console.log(materials);
+    console.log(processes);
   };
 
   return (
@@ -81,23 +54,10 @@ export const Post = memo(() => {
           </Stack>
         </Box>
 
-        <Box mt={2} display="flex" flexDirection="column">
-          {materialList}
-          <Box mt={1}>
-            <Button variant="contained" onClick={onClickIncrementMaterial}>
-              追加する
-            </Button>
-          </Box>
-        </Box>
+        <TextFieldMaterial materials={materials} setMaterials={setMaterials} />
 
-        <Box mt={2} display="flex" flexDirection="column">
-          {processlList}
-          <Box mt={1}>
-            <Button variant="contained" onClick={onClickIncrementProcess}>
-              追加する
-            </Button>
-          </Box>
-        </Box>
+        <TextFieldProcess processes={processes} setProcesses={setProcesses} />
+
         <Box mt={4}>
           <Button onClick={onSubmit} variant="contained">
             投稿する
