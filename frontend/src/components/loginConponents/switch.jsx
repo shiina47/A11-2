@@ -5,6 +5,7 @@ import { useState } from "react";
 import Register from "./register";
 import Login from "./login";
 
+/*register.jsx(登録画面)とlogin.jsx(ログイン画面)を切り替えるボタンの処理*/
 export default function Switch() {
   const [switchLogin , setSwitchLogin] = useState(false);
   const onClickSwitchLogin = () => {
@@ -17,6 +18,7 @@ export default function Switch() {
       <Box sx={{ height: "600px" , width: "300px" , display: "flex" , flexDirection: "column", alignItems: "center"}}>
       {
         (() => {
+          /*  switchLoginがfalseであれば登録画面（ユーザー登録）を表示 */
           if (switchLogin === false){
             return<Box> 
                 <Register/>
@@ -26,6 +28,7 @@ export default function Switch() {
                   </Button>
                 </Box>
             </Box>
+          /*  違えばログイン画面を表示 */
           }else{
             return<Box sx={{alignItems: "center"}}> 
               <Login/>
