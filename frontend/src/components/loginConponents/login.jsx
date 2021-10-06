@@ -13,7 +13,7 @@ export default function Login() {
           <TextField sx={{margin: "8px"}} fullWidth label="パスワード" id="fullWidth" />
         </Box>
         <Box sx={{width: "100%"}}>
-          <Button　sx={{margin: "8px 0px" , borderRadius: "50px"  , width: "100%"}} variant="contained">
+          <Button　sx={{margin: "8px 0px" , width: "100%"}} variant="contained">
             ログイン
           </Button>  
         </Box>  

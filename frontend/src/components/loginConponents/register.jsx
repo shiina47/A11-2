@@ -14,7 +14,7 @@ export default function Register() {
         <TextField sx={{margin: "8px"}} fullWidth label="パスワード（確認）" id="fullWidth" />
       </Box>
       <Box sx={{width: "100%"}}>
-        <Button sx={{margin: "8px 0px" , borderRadius: "50px" , width: "100%"}} variant="contained">
+        <Button sx={{margin: "8px 0px" , width: "100%"}} variant="contained">
           ユーザー登録
         </Button>
       </Box>  
