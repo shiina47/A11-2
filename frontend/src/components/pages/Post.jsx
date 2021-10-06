@@ -9,9 +9,15 @@ export const Post = memo(() => {
   const [recipeForm, setRecipeForm] = useState({
     title: "",
     cost: "",
+    amount: 1,
     minutes: "",
     image: null,
+    liked: [],
+    material: [],
+    process: [],
   });
+  const [image, setImage] = useState(null);
+
   const [materials, setMaterials] = useState([]);
   const [processes, setProcesses] = useState([]);
 
@@ -23,7 +29,9 @@ export const Post = memo(() => {
   };
 
   const onSubmit = () => {
-    console.log(recipeForm);
+    recipeForm.cost = Number(recipeForm.cost);
+    recipeForm.minutes = Number(recipeForm.minutes);
+    recipeForm.image = image;
     createRecipe(recipeForm);
     console.log(materials);
     console.log(processes);
@@ -35,7 +43,11 @@ export const Post = memo(() => {
         <p>レシピ投稿</p>
         <Box>
           <Stack spacing={2}>
-            <input type="file" name="image" onChange={handleChange} />
+            <input
+              type="file"
+              name="image"
+              onChange={(e) => setImage(e.target.files[0])}
+            />
             <TextField
               label="title"
               name="title"
