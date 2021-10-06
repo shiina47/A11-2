@@ -2,6 +2,7 @@ import { memo, useState } from "react";
 import { TextField, Box, Button, Stack } from "@mui/material";
 import { TextFieldMaterial } from "../atoms/TextFieldMaterial";
 import { TextFieldProcess } from "../atoms/TextFieldProcess";
+import { useRecipe } from "../../hooks/useRecipe";
 
 export const Post = memo(() => {
   console.log("レンダリング");
@@ -9,11 +10,12 @@ export const Post = memo(() => {
     title: "",
     cost: "",
     minutes: "",
-    image: "",
+    image: null,
   });
-
   const [materials, setMaterials] = useState([]);
   const [processes, setProcesses] = useState([]);
+
+  const { createRecipe } = useRecipe();
 
   // recipe form のstate関連
   const handleChange = (event) => {
@@ -22,6 +24,7 @@ export const Post = memo(() => {
 
   const onSubmit = () => {
     console.log(recipeForm);
+    createRecipe(recipeForm);
     console.log(materials);
     console.log(processes);
   };
@@ -40,12 +43,14 @@ export const Post = memo(() => {
               onChange={handleChange}
             />
             <TextField
+              type="number"
               label="cost"
               name="cost"
               value={recipeForm.cost}
               onChange={handleChange}
             />
             <TextField
+              type="number"
               label="minutes"
               name="minutes"
               value={recipeForm.minutes}
