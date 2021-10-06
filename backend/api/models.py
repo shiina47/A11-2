@@ -71,6 +71,8 @@ class Recipe(models.Model):
     minutes = models.PositiveIntegerField()
     image = models.ImageField(blank=True, null=True,
                               upload_to=upload_recipe_path)
+    liked = models.ManyToManyField(
+        settings.AUTH_USER_MODEL, related_name='liked', blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now_add=True)
     user = models.ForeignKey(settings.AUTH_USER_MODEL,
