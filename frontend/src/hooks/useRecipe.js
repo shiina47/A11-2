@@ -1,8 +1,10 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useCallback } from "react";
+import { useCallback, useState } from "react";
 import axios from "axios";
 
 export const useRecipe = () => {
+  const [newRecipeState, setNewRecipeState] = useState("");
+
   const createRecipe = useCallback(async (data) => {
     const uploadData = new FormData();
     uploadData.append("title", data.title);
@@ -22,7 +24,8 @@ export const useRecipe = () => {
         },
       })
       .then((res) => {
-        console.log(res.data);
+        const newRecipe = res.data;
+        setNewRecipeState(newRecipe);
       })
       .catch(() => {
         alert("失敗");
@@ -32,5 +35,6 @@ export const useRecipe = () => {
 
   return {
     createRecipe,
+    newRecipeState,
   };
 };
