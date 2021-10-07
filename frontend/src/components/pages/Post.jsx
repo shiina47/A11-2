@@ -3,30 +3,50 @@ import { TextField, Box, Button, Stack } from "@mui/material";
 import { TextFieldMaterial } from "../atoms/TextFieldMaterial";
 import { TextFieldProcess } from "../atoms/TextFieldProcess";
 import { useRecipe } from "../../hooks/useRecipe";
+import { useMaterial } from "../../hooks/useMaterial";
+import { useProcess } from "../../hooks/useProcess";
 
 export const Post = memo(() => {
   console.log("レンダリング");
   const [recipeForm, setRecipeForm] = useState({
     title: "",
     cost: "",
+    amount: 1,
     minutes: "",
     image: null,
+    liked: [],
+    material: [],
+    process: [],
   });
+  const [image, setImage] = useState(null);
+
   const [materials, setMaterials] = useState([]);
   const [processes, setProcesses] = useState([]);
 
-  const { createRecipe } = useRecipe();
+  const { createRecipe, newRecipeState } = useRecipe();
+  const { createMaterial } = useMaterial();
+  const { createProcess } = useProcess();
 
   // recipe form のstate関連
   const handleChange = (event) => {
     setRecipeForm({ ...recipeForm, [event.target.name]: event.target.value });
   };
 
-  const onSubmit = () => {
-    console.log(recipeForm);
-    createRecipe(recipeForm);
+  const onSubmit = async () => {
+    recipeForm.cost = Number(recipeForm.cost);
+    recipeForm.minutes = Number(recipeForm.minutes);
+    recipeForm.image = image;
+    const res = await createRecipe(recipeForm);
+    const id = await newRecipeState.id;
     console.log(materials);
+    materials.map((material) => {
+      return createMaterial(material, id);
+    });
     console.log(processes);
+    processes.map((process) => {
+      return createProcess(process, id);
+    });
+    return res;
   };
 
   return (
@@ -35,7 +55,11 @@ export const Post = memo(() => {
         <p>レシピ投稿</p>
         <Box>
           <Stack spacing={2}>
-            <input type="file" name="image" onChange={handleChange} />
+            <input
+              type="file"
+              name="image"
+              onChange={(e) => setImage(e.target.files[0])}
+            />
             <TextField
               label="title"
               name="title"

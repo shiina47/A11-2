@@ -36,7 +36,7 @@ class RecipeSerializer(serializers.ModelSerializer):
         model = Recipe
 
         extra_kwargs = {'user': {'read_only': True}}
-        fields = ('title', 'cost', 'amount', 'minutes', 'image', 'user', 'liked',
+        fields = ('id', 'title', 'cost', 'amount', 'minutes', 'image', 'user', 'liked',
                   'created_at', 'updated_at', 'material', 'process')
 
 
