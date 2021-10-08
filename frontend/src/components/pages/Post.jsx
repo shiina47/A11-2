@@ -14,16 +14,13 @@ export const Post = memo(() => {
     amount: 1,
     minutes: "",
     image: null,
-    liked: [],
-    material: [],
-    process: [],
   });
   const [image, setImage] = useState(null);
 
   const [materials, setMaterials] = useState([]);
   const [processes, setProcesses] = useState([]);
 
-  const { createRecipe, newRecipeState } = useRecipe();
+  const { createRecipe } = useRecipe();
   const { createMaterial } = useMaterial();
   const { createProcess } = useProcess();
 
@@ -36,17 +33,16 @@ export const Post = memo(() => {
     recipeForm.cost = Number(recipeForm.cost);
     recipeForm.minutes = Number(recipeForm.minutes);
     recipeForm.image = image;
-    const res = await createRecipe(recipeForm);
-    const id = await newRecipeState.id;
-    console.log(materials);
+    const responseData = await createRecipe(recipeForm);
+    const id = responseData.id;
+    console.log(id);
     materials.map((material) => {
       return createMaterial(material, id);
     });
-    console.log(processes);
     processes.map((process) => {
       return createProcess(process, id);
     });
-    return res;
+    return responseData;
   };
 
   return (
