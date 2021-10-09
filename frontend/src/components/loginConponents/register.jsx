@@ -16,11 +16,6 @@ export default function Register() {
   const onChangeConPassword = (event) => setConPass(event.target.value);
 
   const onClickRegister = () => {
-    console.log({
-      email: email,
-      password: pass,
-      password_confirmation: conPass,
-    });
     register({
       email: email,
       password: pass,
