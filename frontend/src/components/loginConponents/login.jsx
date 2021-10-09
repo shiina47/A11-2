@@ -14,7 +14,6 @@ export default function Login() {
   const onChangePassword = (event) => setPassword(event.target.value);
 
   const onClickLogin = () => {
-    console.log({ email: mail, password: password });
     login({ email: mail, password: password });
   };
 
