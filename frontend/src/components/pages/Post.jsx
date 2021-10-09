@@ -7,7 +7,6 @@ import { useMaterial } from "../../hooks/useMaterial";
 import { useProcess } from "../../hooks/useProcess";
 
 export const Post = memo(() => {
-  console.log("レンダリング");
   const [recipeForm, setRecipeForm] = useState({
     title: "",
     cost: "",
