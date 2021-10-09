@@ -2,6 +2,7 @@ import { memo, useState } from "react";
 import { TextField, Box, Button } from "@mui/material";
 
 export const TextFieldProcess = memo((props) => {
+  console.log("test");
   const { processes, setProcesses } = props;
   const [addFormDataP, setAddFormDataP] = useState({
     order: "",
