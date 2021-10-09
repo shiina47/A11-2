@@ -12,10 +12,7 @@ export const RecipeDisplay = memo(() => {
   };
 
   useEffect(() => {
-    console.log('ステートが更新された。');
-    console.log(id);
     setDisplay(recipes[id]);
-    console.log(display);
   }, [id])
 
   useEffect(() => {
@@ -23,7 +20,6 @@ export const RecipeDisplay = memo(() => {
       .get("http://127.0.0.1:8000/api/recipe")
       .then((res) => {
         setRecipes(res.data);
-        console.log(res.data[0].material);
         setDisplay(res.data[0]);
       })
   }, []);
@@ -44,19 +40,6 @@ export const RecipeDisplay = memo(() => {
           />
         : 'test'
       }
-      {/* {recipes.map((recipe) => (
-        <Recipe
-          title={recipe.title}
-          cost={recipe.cost}
-          amount={recipe.amount}
-          minutes={recipe.minutes}
-          image={recipe.image}
-          material={recipe.material}
-          process={recipe.process}
-          onClick={handleRecipe}
-          key={recipe.title}
-        />
-      ))} */}
     </>
   );
 });
