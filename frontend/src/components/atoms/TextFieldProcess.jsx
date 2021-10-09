@@ -40,27 +40,35 @@ export const TextFieldProcess = memo((props) => {
 
   return (
     <Box>
-      {(processes || []).map((process) => {
-        return (
-          <Box mt={2} display="flex" key={process.order}>
-            <p>{process.order}</p>
-            <p>{process.how_to}</p>
-          </Box>
-        );
-      })}
       <Box mt={2} display="flex" flexDirection="column">
-        <h2>add Process</h2>
-        <TextField
-          id="processField"
-          onChange={handleAddFormChangeP}
-          name="how_to"
-          multiline
-          rows={2}
-          label="process"
-          variant="outlined"
-        />
+        <h2>作り方</h2>
+        {(processes || []).map((process) => {
+          return (
+            <Box display="flex" key={process.order}>
+              <Box mr={2}>
+                <h4>{process.order}</h4>
+              </Box>
+              <p>{process.how_to}</p>
+            </Box>
+          );
+        })}
+        <Box display="flex">
+          <Box mr={2}>
+            <h4>{order}</h4>
+          </Box>
 
-        <Box mt={1}>
+          <TextField
+            id="processField"
+            onChange={handleAddFormChangeP}
+            name="how_to"
+            multiline
+            rows={1}
+            variant="outlined"
+            fullWidth={true}
+          />
+        </Box>
+
+        <Box mt={1} display="flex" justifyContent="center">
           <Button variant="contained" onClick={handleAddFormSubmitP}>
             追加する
           </Button>
