@@ -20,7 +20,6 @@ export const RecipeDisplay = memo(() => {
       .get("http://127.0.0.1:8000/api/recipe", {
         headers: {
           Authorization: `JWT ${localStorage.localJWT}`,
-          // Authorization: 'JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjMzODUwMjc0LCJqdGkiOiJiMTRkZjczNzU2OWY0YTFmODBiZTdlNTc5YzlkNzZlMSIsInVzZXJfaWQiOjF9.FM15M2jdxHkxhbQyH4wulohbHuWcB1TNWFDJtAQULS4',
         },
       })
       .then((res) => {
