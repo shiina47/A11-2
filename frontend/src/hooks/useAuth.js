@@ -42,5 +42,15 @@ export const useAuth = () => {
     [login]
   );
 
-  return { login, register };
+  const getUserId = useCallback(async () => {
+    const res = await axios.get("http://127.0.0.1:8000/api/myself/", {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `JWT ${localStorage.localJWT}`,
+      },
+    });
+    console.log(res.data.id);
+  }, []);
+
+  return { login, register, getUserId };
 };
