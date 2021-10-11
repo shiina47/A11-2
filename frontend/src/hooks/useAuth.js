@@ -50,6 +50,7 @@ export const useAuth = () => {
       },
     });
     console.log(res.data.id);
+    return res.data.id;
   }, []);
 
   return { login, register, getUserId };
