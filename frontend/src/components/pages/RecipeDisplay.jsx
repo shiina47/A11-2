@@ -42,7 +42,7 @@ export const RecipeDisplay = memo(() => {
             onClick={handleRecipe}
             key={display.title}
           />
-        : 'ここにレシピが表示されます。'
+        : null
       }
     </>
   );
