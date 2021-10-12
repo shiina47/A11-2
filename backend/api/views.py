@@ -17,6 +17,7 @@ class RecipeViewSet(viewsets.ModelViewSet):
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
 
+
 class MyPageViewSet(viewsets.ModelViewSet):
     queryset = MyPage.objects.all()
     serializer_class = MyPageSerializer
@@ -24,9 +25,11 @@ class MyPageViewSet(viewsets.ModelViewSet):
     def perform_create(self, serializer):
         serializer.save(userPage=self.request.user)
 
+
 class ProcessViewSet(viewsets.ModelViewSet):
     queryset = Process.objects.all()
     serializer_class = ProcessSerializer
+
 
 class MaterialViewSet(viewsets.ModelViewSet):
     queryset = Material.objects.all()
