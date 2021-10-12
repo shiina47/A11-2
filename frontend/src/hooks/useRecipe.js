@@ -3,6 +3,19 @@ import { useCallback } from "react";
 import axios from "axios";
 
 export const useRecipe = () => {
+  const getMyRecipes = useCallback(async (id) => {
+    const res = await axios.get(
+      `http://127.0.0.1:8000/api/recipe/?user=${id}`,
+      {
+        headers: {
+          Authorization: `JWT ${localStorage.localJWT}`,
+        },
+      }
+    );
+    console.log(res.data);
+    return res.data;
+  });
+
   const createRecipe = useCallback(async (data) => {
     const uploadData = new FormData();
     uploadData.append("title", data.title);
@@ -26,5 +39,6 @@ export const useRecipe = () => {
 
   return {
     createRecipe,
+    getMyRecipes,
   };
 };
