@@ -7,8 +7,19 @@ export const RecipeDisplay = memo(() => {
   const [recipes, setRecipes] = useState([]);
   const [display, setDisplay] = useState({});
   const [id, setId] = useState(0);
-  const handleRecipe = () => {
+  const handleRecipe = (recipeId, liked) => {
     setId(prev => prev + 1);
+    // console.log(recipeId);
+    // console.log(liked);
+    // if (!liked.includes(logInId)) {
+    //   liked.push(logInId);
+    // };
+    console.log(liked);
+    // axios
+    //   .patch(`http://127.0.0.1/api/recipe/${recipeId}`, liked, {
+    //     headers: {Authorization: `JWT ${localStorage.localJWT}`,
+    //   },
+    //   });
   };
 
   useEffect(() => {
@@ -25,6 +36,7 @@ export const RecipeDisplay = memo(() => {
       .then((res) => {
         setRecipes(res.data);
         setDisplay(res.data[0]);
+        // console.log(res.data[0]);
       })
   }, []);
 
@@ -32,6 +44,7 @@ export const RecipeDisplay = memo(() => {
     <>
       {display
         ? <Recipe
+            recipeId={display.id}
             title={display.title}
             cost={display.cost}
             amount={display.amount}
@@ -39,6 +52,8 @@ export const RecipeDisplay = memo(() => {
             image={display.image}
             material={display.material}
             process={display.process}
+            userId={display.user}
+            liked={display.liked}
             onClick={handleRecipe}
             key={display.title}
           />

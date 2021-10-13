@@ -30,7 +30,7 @@ const ExpandMore = styled((props) => {
 }));
 
 const Recipe = memo((props) => {
-    const {title, image, cost, minutes, amount, material, process, onClick} = props;
+    const {recipeId, title, image, cost, minutes, amount, material, process, liked, onClick} = props;
     const [expanded, setExpanded] = useState(false);
     const handleExpandClick = () => {
       setExpanded(!expanded);
@@ -67,7 +67,7 @@ const Recipe = memo((props) => {
 
                 </CardContent>
                 <CardActions disableSpacing>
-                    <IconButton aria-label="add to favorites" onClick={onClick}>
+                    <IconButton aria-label="add to favorites" onClick={() => onClick(recipeId, liked)}>
                         <FavoriteIcon />
                     </IconButton>
                     <ExpandMore
