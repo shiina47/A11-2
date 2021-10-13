@@ -7,19 +7,27 @@ export const RecipeDisplay = memo(() => {
   const [recipes, setRecipes] = useState([]);
   const [display, setDisplay] = useState({});
   const [id, setId] = useState(0);
+  const [logInId, setLogInId] = useState(0);
+
   const handleRecipe = (recipeId, liked) => {
     setId(prev => prev + 1);
     // console.log(recipeId);
     // console.log(liked);
-    // if (!liked.includes(logInId)) {
-    //   liked.push(logInId);
-    // };
-    console.log(liked);
-    // axios
-    //   .patch(`http://127.0.0.1/api/recipe/${recipeId}`, liked, {
-    //     headers: {Authorization: `JWT ${localStorage.localJWT}`,
-    //   },
-    //   });
+    
+    if (!liked.includes(logInId)) {
+      liked.push(logInId);
+      const likedData = {
+        liked: liked
+      };
+      axios
+      .patch(`http://127.0.0.1:8000/api/recipe/${recipeId}/`, likedData, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `JWT ${localStorage.localJWT}`,
+      },
+      });
+    };
+    // console.log(liked);
   };
 
   useEffect(() => {
@@ -30,6 +38,7 @@ export const RecipeDisplay = memo(() => {
     axios
       .get("http://127.0.0.1:8000/api/recipe", {
         headers: {
+          "Content-Type": "application/json",
           Authorization: `JWT ${localStorage.localJWT}`,
         },
       })
@@ -37,6 +46,16 @@ export const RecipeDisplay = memo(() => {
         setRecipes(res.data);
         setDisplay(res.data[0]);
         // console.log(res.data[0]);
+      })
+    axios
+      .get("http://127.0.0.1:8000/api/myself", {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `JWT ${localStorage.localJWT}`,
+        },
+      })
+      .then((res) => {
+        setLogInId(res.data.id);
       })
   }, []);
 
