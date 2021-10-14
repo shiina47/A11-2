@@ -18,12 +18,22 @@ export default function Login() {
   };
 
   return (
-    <Box
-      sx={{ display: "flex", alignItems: "center", flexDirection: "column" }}
+    <Box sx={{      
+      display: "flex",
+      alignItems: "center",
+      flexDirection: "column",
+      width: "100%"
+      }}
     >
       <h1 style={{ fontSize: "50px" }}>Reciper</h1>
       <h3>ログイン</h3>
-      <Box>
+      <Box sx={{          
+        display: "flex",
+        alignItems: "center",
+        flexDirection: "column",
+        width: "100%"
+        }}
+      >
         <TextField
           sx={{ margin: "8px" }}
           fullWidth
