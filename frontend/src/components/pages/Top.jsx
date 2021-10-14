@@ -13,8 +13,6 @@ export const Top = memo(() => {
     history.push("/recipes");
   };
 
-  const { getUserId } = useAuth();
-
   return (
     <>
       <Grid container alignItems="center" direction="column">
@@ -32,9 +30,6 @@ export const Top = memo(() => {
           </Button>
         </Grid>
       </Grid>
-      <Button variant="contained" onClick={getUserId}>
-        ゆーざーIDゲット ボタン
-      </Button>
     </>
   );
 });
