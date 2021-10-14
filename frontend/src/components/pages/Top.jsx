@@ -2,7 +2,6 @@ import { memo } from "react";
 import { useHistory } from "react-router-dom";
 import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
-import { useAuth } from "../../hooks/useAuth";
 
 export const Top = memo(() => {
   const history = useHistory();
