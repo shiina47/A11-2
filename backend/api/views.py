@@ -20,6 +20,7 @@ class MyProfileView(generics.RetrieveUpdateAPIView):
 class RecipeViewSet(viewsets.ModelViewSet):
     queryset = Recipe.objects.all()
     serializer_class = RecipeSerializer
+    filter_fields = ('user', 'liked')
 
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)

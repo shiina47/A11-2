@@ -7,15 +7,18 @@ import { useProcess } from "../../hooks/useProcess";
 
 import { TextField, Box, Button, Stack, IconButton, Grid } from "@mui/material";
 import AddPhotoAlternateIcon from "@mui/icons-material/AddPhotoAlternate";
+import { useHistory } from "react-router-dom";
+
+const initialState = {
+  title: "",
+  cost: "",
+  amount: 1,
+  minutes: "",
+  image: null,
+};
 
 export const Post = memo(() => {
-  const [recipeForm, setRecipeForm] = useState({
-    title: "",
-    cost: "",
-    amount: 1,
-    minutes: "",
-    image: null,
-  });
+  const [recipeForm, setRecipeForm] = useState(initialState);
   const [image, setImage] = useState(null);
 
   const [materials, setMaterials] = useState([]);
@@ -29,6 +32,8 @@ export const Post = memo(() => {
   const handleChange = (event) => {
     setRecipeForm({ ...recipeForm, [event.target.name]: event.target.value });
   };
+
+  const history = useHistory();
 
   // 投稿btnの処理
   const onSubmit = async () => {
@@ -44,6 +49,8 @@ export const Post = memo(() => {
     processes.map((process) => {
       return createProcess(process, id);
     });
+    setRecipeForm(initialState);
+    history.push("/recipes");
     return responseData;
   };
 

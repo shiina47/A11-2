@@ -2,7 +2,6 @@ import { memo } from "react";
 import { useHistory } from "react-router-dom";
 import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
-import { useAuth } from "../../hooks/useAuth";
 
 export const Top = memo(() => {
   const history = useHistory();
@@ -12,8 +11,6 @@ export const Top = memo(() => {
   const toRecipes = () => {
     history.push("/recipes");
   };
-
-  const { getUserId } = useAuth();
 
   return (
     <>
@@ -32,9 +29,6 @@ export const Top = memo(() => {
           </Button>
         </Grid>
       </Grid>
-      <Button variant="contained" onClick={getUserId}>
-        ゆーざーIDゲット ボタン
-      </Button>
     </>
   );
 });
