@@ -7,4 +7,4 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include('api.urls')),
     path('authen/', include('djoser.urls.jwt')),
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

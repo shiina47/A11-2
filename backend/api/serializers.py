@@ -16,11 +16,9 @@ class UserSerializer(serializers.ModelSerializer):
 
 class MyPageSerializer(serializers.ModelSerializer):
 
-    created_at = serializers.DateTimeField(format="%Y-%m-%d", read_only=True)
-
     class Meta:
         model = MyPage
-        fields = '__all__'
+        fields = ('name', 'image', 'userPage')
         extra_kwargs = {'userPage': {'read_only': True}}
 
 

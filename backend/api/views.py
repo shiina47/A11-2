@@ -10,9 +10,17 @@ class CreateUserView(generics.CreateAPIView):
     permission_classes = (AllowAny,)
 
 
+class MyProfileView(generics.RetrieveUpdateAPIView):
+    serializer_class = UserSerializer
+
+    def get_object(self):
+        return self.request.user
+
+
 class RecipeViewSet(viewsets.ModelViewSet):
     queryset = Recipe.objects.all()
     serializer_class = RecipeSerializer
+    filter_fields = ('user', 'liked')
 
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
