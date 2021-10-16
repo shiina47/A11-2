@@ -9,7 +9,7 @@ export const RecipeDisplay = memo(() => {
   const [id, setId] = useState(0);
   const [logInId, setLogInId] = useState(0);
 
-  const handleRecipe = (recipeId, liked) => {
+  const likeRecipe = (recipeId, liked) => {
     setId(prev => prev + 1);
     // console.log(recipeId);
     // console.log(liked);
@@ -17,17 +17,33 @@ export const RecipeDisplay = memo(() => {
     if (!liked.includes(logInId)) {
       liked.push(logInId);
       const likedData = {
-        liked: liked
+        liked: liked,
+        isDisplayed: true,
       };
+      console.log(likedData);
       axios
       .patch(`http://127.0.0.1:8000/api/recipe/${recipeId}/`, likedData, {
         headers: {
           "Content-Type": "application/json",
           Authorization: `JWT ${localStorage.localJWT}`,
-      },
+        },
       });
     };
     // console.log(liked);
+  };
+
+  const dislikeRecipe = (recipeId) => {
+    setId(prev => prev + 1);
+    const dislikedData = {
+      isDisplayed: true,
+    };
+    axios
+      .patch(`http://127.0.0.1:8000/api/recipe/${recipeId}/`, dislikedData, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `JWT ${localStorage.localJWT}`,
+        },
+      });
   };
 
   useEffect(() => {
@@ -36,7 +52,7 @@ export const RecipeDisplay = memo(() => {
 
   useEffect(() => {
     axios
-      .get("http://127.0.0.1:8000/api/recipe", {
+      .get("http://127.0.0.1:8000/api/recipe/?isDisplayed=false", {
         headers: {
           "Content-Type": "application/json",
           Authorization: `JWT ${localStorage.localJWT}`,
@@ -73,7 +89,8 @@ export const RecipeDisplay = memo(() => {
             process={display.process}
             userId={display.user}
             liked={display.liked}
-            onClick={handleRecipe}
+            onClickLike={likeRecipe}
+            onClickDislike={dislikeRecipe}
             key={display.title}
           />
         : null
