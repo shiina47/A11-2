@@ -8,6 +8,7 @@ import Collapse from '@mui/material/Collapse';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import FavoriteIcon from '@mui/icons-material/Favorite';
+import CancelIcon from '@mui/icons-material/Cancel';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import Divider from '@mui/material/Divider';
 import Box from '@mui/material/Box';
@@ -30,7 +31,7 @@ const ExpandMore = styled((props) => {
 }));
 
 const Recipe = memo((props) => {
-    const {recipeId, title, image, cost, minutes, amount, material, process, liked, onClick} = props;
+    const {recipeId, title, image, cost, minutes, amount, material, process, liked, onClickLike, onClickDislike} = props;
     const [expanded, setExpanded] = useState(false);
     const handleExpandClick = () => {
       setExpanded(!expanded);
@@ -67,7 +68,10 @@ const Recipe = memo((props) => {
 
                 </CardContent>
                 <CardActions disableSpacing>
-                    <IconButton aria-label="add to favorites" onClick={() => onClick(recipeId, liked)}>
+                    <IconButton aria-label="add to favorites" onClick={() => onClickDislike(recipeId)}>
+                        <CancelIcon />
+                    </IconButton>
+                    <IconButton aria-label="add to favorites" onClick={() => onClickLike(recipeId, liked)}>
                         <FavoriteIcon />
                     </IconButton>
                     <ExpandMore
