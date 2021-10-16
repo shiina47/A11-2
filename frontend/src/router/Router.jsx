@@ -8,6 +8,7 @@ import { Post } from "../components/pages/Post";
 import { MyPage } from "../components/pages/MyPage";
 import { NotFound } from "../components/pages/NotFound";
 import { Header } from "../components/pages/Header";
+import { RecipeDetail } from "../components/pages/RecipeDetail";
 
 export const Router = memo(() => {
   return (
@@ -19,6 +20,7 @@ export const Router = memo(() => {
         <Route exact path="/recipes" component={RecipeDisplay} />
         <Route exact path="/post" component={Post} />
         <Route exact path="/mypage" component={MyPage} />
+        <Route exact path="/detail" component={RecipeDetail} />
         <Route component={NotFound} />
       </Switch>
     </>
