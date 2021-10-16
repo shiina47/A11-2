@@ -1,5 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { memo, useEffect } from "react";
+import { useHistory } from "react-router-dom";
 import { Box, Typography, List, ListItem, ListItemText } from "@mui/material";
 
 import { useRecipe } from "../../hooks/useRecipe";
@@ -7,6 +8,8 @@ import { useRecipe } from "../../hooks/useRecipe";
 export const MyPage = memo(() => {
   const { getMyRecipes, myRecipes, getMyLikedRecipes, myLikedRecipes } =
     useRecipe();
+
+  const history = useHistory();
 
   useEffect(() => {
     getMyRecipes();
@@ -42,7 +45,15 @@ export const MyPage = memo(() => {
           {myRecipes.map((myRecipe) => {
             return (
               <ListItem key={myRecipe.id} button>
-                <ListItemText primary={myRecipe.title} />
+                <ListItemText
+                  primary={myRecipe.title}
+                  onClick={() =>
+                    history.push({
+                      pathname: "/detail",
+                      state: { id: myRecipe.id },
+                    })
+                  }
+                />
               </ListItem>
             );
           })}
