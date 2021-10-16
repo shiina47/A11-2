@@ -2,6 +2,7 @@
 import { memo, useState, useEffect } from "react";
 import axios from "axios";
 import Recipe from "./Recipe";
+import TinderCard from "react-tinder-card";
 
 export const RecipeDisplay = memo(() => {
   const [recipes, setRecipes] = useState([]);
@@ -13,7 +14,7 @@ export const RecipeDisplay = memo(() => {
     setId(prev => prev + 1);
     // console.log(recipeId);
     // console.log(liked);
-    
+
     if (!liked.includes(logInId)) {
       liked.push(logInId);
       const likedData = {
@@ -59,8 +60,17 @@ export const RecipeDisplay = memo(() => {
       })
   }, []);
 
+  const onSwipe = (direction) => {
+        if (direction === "left"){
+            console.log('BAD!!')
+        }
+        if (direction === "right"){
+            console.log('LIKE!!')
+        }
+    }
+
   return (
-    <>
+    <TinderCard onSwipe={onSwipe} preventSwipe={['right', 'left']}>
       {display
         ? <Recipe
             recipeId={display.id}
@@ -78,6 +88,6 @@ export const RecipeDisplay = memo(() => {
           />
         : null
       }
-    </>
+    </TinderCard>
   );
 });

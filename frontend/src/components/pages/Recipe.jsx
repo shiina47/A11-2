@@ -17,6 +17,7 @@ import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
+import TinderCard from 'react-tinder-card';
 
 const ExpandMore = styled((props) => {
     const { expand, ...other } = props;
