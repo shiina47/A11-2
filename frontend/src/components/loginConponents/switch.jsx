@@ -20,7 +20,7 @@ export default function Switch() {
         (() => {
           /*  switchLoginがfalseであれば登録画面（ユーザー登録）を表示 */
           if (switchLogin === false){
-            return<Box　sx={{width: "100%"}} > 
+            return<Box sx={{width:"100%"}}> 
                 <Register/>
                 <Box sx={{display:"flex" , justifyContent: "center"}}>
                   <Button onClick={onClickSwitchLogin}>
@@ -31,7 +31,7 @@ export default function Switch() {
           /*  違えばログイン画面を表示 */
           }else{
             return<Box sx={{width: "100%"}}> 
-              <Login/>
+            <Login/>
               <Box sx={{display:"flex" , justifyContent: "center"}}>
                 <Button onClick={onClickSwitchLogin}>
                   新規登録
