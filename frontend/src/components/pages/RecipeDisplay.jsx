@@ -70,7 +70,7 @@ export const RecipeDisplay = memo(() => {
     }
 
   return (
-    <TinderCard onSwipe={onSwipe} preventSwipe={['right', 'left']}>
+    <TinderCard onSwipe={onSwipe} preventSwipe={['up', 'down']}>
       {display
         ? <Recipe
             recipeId={display.id}
