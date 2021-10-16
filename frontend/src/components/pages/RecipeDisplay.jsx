@@ -78,10 +78,10 @@ export const RecipeDisplay = memo(() => {
 
   const onSwipe = (direction) => {
         if (direction === "left"){
-            console.log('BAD!!')
+          console.log('BAD!!')
         }
-        if (direction === "right"){
-            console.log('LIKE!!')
+        else {
+          console.log('LIKE!!')
         }
     }
 
