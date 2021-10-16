@@ -2,7 +2,6 @@ import { memo } from "react";
 import { useHistory } from "react-router-dom";
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
-import { useAuth } from "../../hooks/useAuth";
 import img from "../../img/photo-1490645935967-10de6ba17061.jpeg";
 
 export const Top = memo(() => {
@@ -13,8 +12,6 @@ export const Top = memo(() => {
   const toRecipes = () => {
     history.push("/recipes");
   };
-
-  const { getUserId } = useAuth();
 
   return (
     <>
@@ -66,9 +63,6 @@ export const Top = memo(() => {
             </Button>
             <Button variant="contained" sx={{ marginBottom: "8px" , width: "60%" }} onClick={toRecipes} >
               レシピを見つける
-            </Button>
-            <Button variant="contained" sx={{width: "60%"}} onClick={getUserId}>
-              ゆーざーIDゲット ボタン
             </Button>
           </Box>
         </Box>
