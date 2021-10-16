@@ -3,7 +3,7 @@ import { useHistory } from "react-router-dom";
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 import { useAuth } from "../../hooks/useAuth";
-import img from "../photo-1482049016688-2d3e1b311543.jpeg";
+import img from "../../img/photo-1490645935967-10de6ba17061.jpeg";
 
 export const Top = memo(() => {
   const history = useHistory();
@@ -18,7 +18,14 @@ export const Top = memo(() => {
 
   return (
     <>
-      <Box sx={{ display: "flex", justifyContent: "center" , backgroundImage: `url(${img})` , backgroundSize:"cover" , height:"calc(100vh - 64px)"}}>
+      <Box sx={{
+        display: "flex",　
+        justifyContent: "center" , 
+        backgroundImage: `url(${img})` , 
+        backgroundSize:"cover" , 
+        height:"calc(100vh - 64px)"
+        }}
+      >
         <Box
           sx={{
             width: "300px",
