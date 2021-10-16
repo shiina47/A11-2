@@ -16,11 +16,9 @@ class UserSerializer(serializers.ModelSerializer):
 
 class MyPageSerializer(serializers.ModelSerializer):
 
-    created_at = serializers.DateTimeField(format="%Y-%m-%d", read_only=True)
-
     class Meta:
         model = MyPage
-        fields = '__all__'
+        fields = ('name', 'image', 'userPage')
         extra_kwargs = {'userPage': {'read_only': True}}
 
 
@@ -36,7 +34,7 @@ class RecipeSerializer(serializers.ModelSerializer):
         model = Recipe
 
         extra_kwargs = {'user': {'read_only': True}}
-        fields = ('id', 'title', 'cost', 'amount', 'minutes', 'image', 'user', 'liked',
+        fields = ('id', 'title', 'cost', 'amount', 'minutes', 'image', 'user', 'liked', 'idDisplayed',
                   'created_at', 'updated_at', 'material', 'process')
 
 
