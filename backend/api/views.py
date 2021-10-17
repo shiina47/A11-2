@@ -35,7 +35,7 @@ class MyPageViewSet(viewsets.ModelViewSet):
 
 
 class ProcessViewSet(viewsets.ModelViewSet):
-    queryset = Process.objects.all()
+    queryset = Process.objects.all().order_by('order')
     serializer_class = ProcessSerializer
 
 
