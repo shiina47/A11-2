@@ -4,7 +4,7 @@ import axios from "axios";
 
 export const useRecipe = () => {
   const [myRecipes, setMyRecipes] = useState([]);
-  const [selectedRecipe, setSelectedRecipe] = useState();
+  const [selectedRecipe, setSelectedRecipe] = useState(undefined);
   const [myLikedRecipes, setMyLikedRecipes] = useState([]);
 
   const getMyRecipes = useCallback(async () => {
