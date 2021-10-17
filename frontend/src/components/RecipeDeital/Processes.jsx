@@ -10,11 +10,7 @@ export const Processes = memo((props) => {
         <Typography m={2} fontWeight="bold" variant="h6">
           手順
         </Typography>
-        <Box
-          display="flex"
-          justifyContent="center"
-          flexDirection="column-reverse"
-        >
+        <Box display="flex" justifyContent="center" flexDirection="column">
           {processes &&
             processes.map((process, index) => {
               return (
