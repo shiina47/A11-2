@@ -18,6 +18,6 @@ const STitleDiv = styled.div`
   margin-top: 10px;
   margin-left: auto;
   margin-right: auto;
-  background-color: rgba(250, 178, 35, 0.9);
+  background-color: #ff9800;
   border-radius: 10px;
 `;
