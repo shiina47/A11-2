@@ -26,7 +26,7 @@ const SPrimaryBtn = styled.div`
   color: #ffffff;
   border-radius: 50vh;
   transition: 0.3s;
-  background-color: #fd9f33f8;
+  background-color: rgba(250, 178, 35, 0.9);
   &:hover {
     opacity: 0.8;
     cursor: pointer;

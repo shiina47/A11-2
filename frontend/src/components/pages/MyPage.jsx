@@ -7,6 +7,7 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import styled from "styled-components";
 
 import { useRecipe } from "../../hooks/useRecipe";
+import { TitleDiv } from "../atoms/TitleDiv";
 
 export const MyPage = memo(() => {
   const { getMyRecipes, myRecipes, getMyLikedRecipes, myLikedRecipes } =
@@ -27,7 +28,7 @@ export const MyPage = memo(() => {
         justifyContent="center"
         alignItems="center"
       >
-        <STitleDiv>
+        <TitleDiv>
           <Typography
             variant="h6"
             fontWeight="bold"
@@ -37,7 +38,7 @@ export const MyPage = memo(() => {
           >
             投稿したレシピ
           </Typography>
-        </STitleDiv>
+        </TitleDiv>
 
         <Box width="370px">
           {myRecipes.map((myRecipe) => {
@@ -85,7 +86,7 @@ export const MyPage = memo(() => {
         justifyContent="center"
         alignItems="center"
       >
-        <STitleDiv>
+        <TitleDiv>
           <Typography
             variant="h6"
             fontWeight="bold"
@@ -95,7 +96,7 @@ export const MyPage = memo(() => {
           >
             お気に入りのレシピ
           </Typography>
-        </STitleDiv>
+        </TitleDiv>
 
         <Box width="370px">
           {myLikedRecipes.map((myLikedRecipe) => {
@@ -139,16 +140,6 @@ export const MyPage = memo(() => {
     </Box>
   );
 });
-
-const STitleDiv = styled.div`
-  display: flex;
-  justify-content: center;
-  width: 350px;
-  height: 40px;
-  margin-top: 10px;
-  background-color: rgba(250, 178, 35, 0.9);
-  border-radius: 10px;
-`;
 
 const SListBox = styled.div`
   padding: 5px;

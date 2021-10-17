@@ -10,6 +10,7 @@ import { useHistory } from "react-router-dom";
 import { InputField } from "../atoms/InputField";
 import { PrimaryBtn } from "../atoms/PrimaryBtn";
 import { InputFile } from "../Post/InputFile";
+import { TitleDiv } from "../atoms/TitleDiv";
 
 const initialState = {
   title: "",
@@ -64,11 +65,20 @@ export const Post = memo(() => {
 
   return (
     <>
-      <Box my={4} mx="auto" width={300}>
-        <Typography fontWeight="bold" variant="h5" color="text.primary">
-          レシピ投稿
-        </Typography>
-        <Box>
+      <Box my={4} mx="auto" width={370}>
+        <TitleDiv>
+          <Typography
+            variant="h6"
+            fontWeight="bold"
+            color="white"
+            textAlign="center"
+            mt={1}
+          >
+            レシピ投稿
+          </Typography>
+        </TitleDiv>
+
+        <Box paddingX={4}>
           <Stack spacing={2}>
             <input
               type="file"
@@ -169,15 +179,15 @@ export const Post = memo(() => {
           </Stack>
         </Box>
 
-        <Box my={2}>
+        <Box p={4} paddingBottom={0}>
           <TextFieldMaterial
             materials={materials}
             setMaterials={setMaterials}
           />
         </Box>
-
-        <TextFieldProcess processes={processes} setProcesses={setProcesses} />
-
+        <Box p={4} paddingBottom={0}>
+          <TextFieldProcess processes={processes} setProcesses={setProcesses} />
+        </Box>
         <Box display="flex" justifyContent="center" mt={4}>
           <PrimaryBtn onClick={onSubmit}>投稿する</PrimaryBtn>
         </Box>
