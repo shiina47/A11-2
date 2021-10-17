@@ -1,6 +1,5 @@
 import { memo, useState } from "react";
-import { Box, Stack, IconButton, Typography } from "@mui/material";
-import AddPhotoAlternateIcon from "@mui/icons-material/AddPhotoAlternate";
+import { Box, Stack, Typography, Alert } from "@mui/material";
 
 import { TextFieldMaterial } from "../Post/TextFieldMaterial";
 import { TextFieldProcess } from "../Post/TextFieldProcess";
@@ -10,6 +9,7 @@ import { useProcess } from "../../hooks/useProcess";
 import { useHistory } from "react-router-dom";
 import { InputField } from "../atoms/InputField";
 import { PrimaryBtn } from "../atoms/PrimaryBtn";
+import { InputFile } from "../Post/InputFile";
 
 const initialState = {
   title: "",
@@ -22,6 +22,7 @@ const initialState = {
 export const Post = memo(() => {
   const [recipeForm, setRecipeForm] = useState(initialState);
   const [image, setImage] = useState(null);
+  const [alert, setAlert] = useState(false);
 
   const [materials, setMaterials] = useState([]);
   const [processes, setProcesses] = useState([]);
@@ -74,12 +75,24 @@ export const Post = memo(() => {
               name="image"
               id="imageInput"
               hidden={true}
-              onChange={(e) => setImage(e.target.files[0])}
+              onChange={(e) => {
+                setImage(e.target.files[0]);
+                setAlert(!alert);
+              }}
             />
-            <h4>写真を投稿</h4>
-            <IconButton onClick={handlerEditPicture} size="large">
-              <AddPhotoAlternateIcon color="secondary" fontSize="large" />
-            </IconButton>
+            <Typography fontWeight="bold" variant="body1" color="text.primary">
+              写真
+            </Typography>
+            <Box display="flex" justifyContent="center" flexDirection="column">
+              <InputFile onClick={handlerEditPicture}>ファイルを選択</InputFile>
+              {alert ? (
+                <Box mt={2}>
+                  <Alert severity="success">写真を選択しました</Alert>
+                </Box>
+              ) : (
+                <></>
+              )}
+            </Box>
 
             <Box>
               <Typography

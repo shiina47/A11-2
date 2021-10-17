@@ -56,9 +56,16 @@ export const TextFieldProcess = memo((props) => {
             </Box>
           );
         })}
-        <Box display="flex">
+        <Box display="flex" mt={2}>
           <Box mr={2}>
-            <h4>{order}</h4>
+            <Typography
+              fontWeight="bold"
+              variant="body1"
+              color="text.primary"
+              alignSelf="flex-start"
+            >
+              {order}
+            </Typography>
           </Box>
 
           <TextField
