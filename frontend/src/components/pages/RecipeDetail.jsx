@@ -27,6 +27,7 @@ export const RecipeDetail = memo(() => {
         flexDirection: "column",
         width: "370px",
         marginX: "auto",
+        marginBottom: "50px",
       }}
     >
       <Typography alignSelf="start" m={2} fontWeight="bold" variant="h5">
