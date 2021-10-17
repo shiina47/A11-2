@@ -10,24 +10,30 @@ export const Processes = memo((props) => {
         <Typography m={2} fontWeight="bold" variant="h6">
           手順
         </Typography>
-        {processes &&
-          processes.map((process, index) => {
-            return (
-              <Box key={index}>
-                <Typography
-                  width="80%"
-                  marginX="auto"
-                  marginY="12px"
-                  variant="body1"
-                  fontWeight="medium"
-                  borderBottom={1}
-                  borderColor="grey.500"
-                >
-                  {process}
-                </Typography>
-              </Box>
-            );
-          })}
+        <Box
+          display="flex"
+          justifyContent="center"
+          flexDirection="column-reverse"
+        >
+          {processes &&
+            processes.map((process, index) => {
+              return (
+                <Box key={index}>
+                  <Typography
+                    width="80%"
+                    marginX="auto"
+                    marginY="12px"
+                    variant="body1"
+                    fontWeight="medium"
+                    borderBottom={1}
+                    borderColor="grey.500"
+                  >
+                    {process}
+                  </Typography>
+                </Box>
+              );
+            })}
+        </Box>
       </Box>
     </>
   );
