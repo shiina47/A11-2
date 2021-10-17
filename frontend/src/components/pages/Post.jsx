@@ -132,6 +132,7 @@ export const Post = memo(() => {
                   color="text.secondary"
                   fontWeight="bold"
                   alignSelf="flex-end"
+                  marginLeft="2px"
                 >
                   分
                 </Typography>
@@ -159,6 +160,7 @@ export const Post = memo(() => {
                   color="text.secondary"
                   fontWeight="bold"
                   alignSelf="flex-end"
+                  marginLeft="2px"
                 >
                   円
                 </Typography>

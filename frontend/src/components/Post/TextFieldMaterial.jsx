@@ -95,20 +95,25 @@ export const TextFieldMaterial = memo((props) => {
         </Box>
 
         <Box display="flex">
-          <InputField
-            type="text"
-            id="nameField"
-            placeholder="例：鶏むね肉"
-            name="name"
-            onChange={handleAddFormChange}
-          />
-          <InputField
-            type="text"
-            id="materialField"
-            placeholder="例：200g"
-            name="amount"
-            onChange={handleAddFormChange}
-          />
+          <Box>
+            <InputField
+              type="text"
+              id="nameField"
+              placeholder="例：鶏むね肉"
+              name="name"
+              onChange={handleAddFormChange}
+            />
+          </Box>
+
+          <Box marginLeft="2px">
+            <InputField
+              type="text"
+              id="materialField"
+              placeholder="例：200g"
+              name="amount"
+              onChange={handleAddFormChange}
+            />
+          </Box>
         </Box>
 
         <Box mt={2} display="flex" justifyContent="center">
