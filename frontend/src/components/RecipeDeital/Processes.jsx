@@ -4,6 +4,7 @@ import { Box, Typography } from "@mui/material";
 
 export const Processes = memo((props) => {
   const { processes } = props;
+
   return (
     <>
       <Box width="100%" marginTop="5px">
@@ -24,7 +25,7 @@ export const Processes = memo((props) => {
                     borderBottom={1}
                     borderColor="grey.500"
                   >
-                    {process}
+                    {process.order}.{process.how_to}
                   </Typography>
                 </Box>
               );

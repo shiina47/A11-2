@@ -31,7 +31,21 @@ export const useRecipe = () => {
         Authorization: `JWT ${localStorage.localJWT}`,
       },
     });
-    console.log(res.data);
+
+    function compare(a, b) {
+      const orderA = a.order;
+      const orderB = b.order;
+
+      let comparison = 0;
+      if (orderA > orderB) {
+        comparison = 1;
+      } else if (orderA < orderB) {
+        comparison = -1;
+      }
+      return comparison;
+    }
+
+    res.data.process = await res.data.process.sort(compare);
     setSelectedRecipe(res.data);
   });
 
