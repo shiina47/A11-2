@@ -87,7 +87,15 @@ export const MyPage = memo(() => {
           {myLikedRecipes.map((myLikedRecipe) => {
             return (
               <ListItem key={myLikedRecipe.id} button>
-                <ListItemText primary={myLikedRecipe.title} />
+                <ListItemText
+                  primary={myLikedRecipe.title}
+                  onClick={() =>
+                    history.push({
+                      pathname: "/detail",
+                      state: { id: myLikedRecipe.id },
+                    })
+                  }
+                />
               </ListItem>
             );
           })}
