@@ -4,8 +4,8 @@ import { useLocation } from "react-router-dom";
 import { Box, Typography } from "@mui/material";
 
 import { useRecipe } from "../../hooks/useRecipe";
-import { CookMunites } from "../molecules/CookMunites";
-import { CookCost } from "../molecules/CookCost";
+import { CookMunites } from "../RecipeDeital/CookMunites";
+import { CookCost } from "../RecipeDeital/CookCost";
 
 export const RecipeDetail = memo(() => {
   const location = useLocation();
@@ -47,6 +47,31 @@ export const RecipeDetail = memo(() => {
       >
         <CookMunites minutes={selectedRecipe && selectedRecipe.minutes} />
         <CookCost cost={selectedRecipe && selectedRecipe.cost} />
+      </Box>
+
+      <Box width="100%" marginTop="5px">
+        <Typography m={2} fontWeight="bold" variant="h6">
+          材料(1人前)
+        </Typography>
+        {selectedRecipe &&
+          selectedRecipe.material.map((m, index) => {
+            return (
+              <Box key={index}>
+                <Typography
+                  width="80%"
+                  marginX="auto"
+                  marginY="12px"
+                  variant="body1"
+                  fontWeight="medium"
+                  textAlign="center"
+                  borderBottom={1}
+                  borderColor="grey.500"
+                >
+                  {m}
+                </Typography>
+              </Box>
+            );
+          })}
       </Box>
     </Box>
   );
