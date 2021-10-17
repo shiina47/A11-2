@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { memo, useEffect } from "react";
-import { useLocation } from "react-router-dom";
-import { Box, Typography } from "@mui/material";
+import { useHistory, useLocation } from "react-router-dom";
+import { Box, Button, Typography } from "@mui/material";
 
 import { useRecipe } from "../../hooks/useRecipe";
 import { CookMunites } from "../RecipeDeital/CookMunites";
@@ -12,8 +12,13 @@ import { Processes } from "../RecipeDeital/Processes";
 export const RecipeDetail = memo(() => {
   const location = useLocation();
   const recipeId = location.state.id;
+  const history = useHistory();
 
   const { getSelectedRecipe, selectedRecipe } = useRecipe();
+
+  const onClickBackMyPage = () => {
+    history.push("/mypage");
+  };
 
   useEffect(() => {
     getSelectedRecipe(recipeId);
@@ -53,6 +58,11 @@ export const RecipeDetail = memo(() => {
       </Box>
       <Material materials={selectedRecipe && selectedRecipe.material} />
       <Processes processes={selectedRecipe && selectedRecipe.process} />
+      <Box marginTop="30px">
+        <Button variant="contained" onClick={onClickBackMyPage}>
+          もどる
+        </Button>
+      </Box>
     </Box>
   );
 });
