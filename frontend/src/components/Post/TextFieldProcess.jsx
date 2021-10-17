@@ -1,5 +1,6 @@
 import { memo, useState } from "react";
-import { TextField, Box, Button, Typography } from "@mui/material";
+import { TextField, Box, Typography } from "@mui/material";
+import { AddBtn } from "../atoms/AddBtn";
 
 export const TextFieldProcess = memo((props) => {
   console.log("test");
@@ -42,7 +43,7 @@ export const TextFieldProcess = memo((props) => {
   return (
     <Box>
       <Box mt={2} display="flex" flexDirection="column">
-        <Typography fontWeight="bold" variant="h5" color="text.primary">
+        <Typography fontWeight="bold" variant="body1" color="text.primary">
           作り方
         </Typography>
         {(processes || []).map((process) => {
@@ -72,9 +73,7 @@ export const TextFieldProcess = memo((props) => {
         </Box>
 
         <Box mt={1} display="flex" justifyContent="center">
-          <Button variant="contained" onClick={handleAddFormSubmitP}>
-            追加する
-          </Button>
+          <AddBtn onClick={handleAddFormSubmitP}>追加する</AddBtn>
         </Box>
       </Box>
     </Box>
