@@ -4,6 +4,7 @@ import axios from "axios";
 
 export const useRecipe = () => {
   const [myRecipes, setMyRecipes] = useState([]);
+  const [selectedRecipe, setSelectedRecipe] = useState(undefined);
   const [myLikedRecipes, setMyLikedRecipes] = useState([]);
 
   const getMyRecipes = useCallback(async () => {
@@ -21,6 +22,17 @@ export const useRecipe = () => {
         },
       })
       .then((res) => setMyRecipes(res.data));
+  });
+
+  const getSelectedRecipe = useCallback(async (id) => {
+    const res = await axios.get(`http://127.0.0.1:8000/api/recipe/${id}`, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `JWT ${localStorage.localJWT}`,
+      },
+    });
+    console.log(res.data);
+    setSelectedRecipe(res.data);
   });
 
   const getMyLikedRecipes = useCallback(async () => {
@@ -67,5 +79,7 @@ export const useRecipe = () => {
     myRecipes,
     getMyLikedRecipes,
     myLikedRecipes,
+    getSelectedRecipe,
+    selectedRecipe,
   };
 };
