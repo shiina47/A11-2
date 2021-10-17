@@ -2,6 +2,7 @@
 import { memo, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { Box, Typography } from "@mui/material";
+import FavoriteIcon from "@mui/icons-material/Favorite";
 
 import styled from "styled-components";
 
@@ -51,14 +52,27 @@ export const MyPage = memo(() => {
                 }
               >
                 <SImg src={myRecipe && myRecipe.image} alt="料理" />
-                <Typography
-                  variant="body1"
-                  fontWeight="bold"
+                <Box
                   marginLeft="10px"
-                  marginTop="5px"
+                  display="flex"
+                  flexDirection="column"
+                  justifyContent="space-around"
                 >
-                  {myRecipe.title}
-                </Typography>
+                  <Typography variant="body1" fontWeight="bold" marginTop="5px">
+                    {myRecipe.title}
+                  </Typography>
+                  <Box display="flex">
+                    <FavoriteIcon color="error" />
+                    <Typography
+                      variant="body1"
+                      fontWeight="500"
+                      marginLeft="5px"
+                      marginTop="2px"
+                    >
+                      {myRecipe.likes_count}
+                    </Typography>
+                  </Box>
+                </Box>
               </SListBox>
             );
           })}
@@ -96,14 +110,27 @@ export const MyPage = memo(() => {
                 }
               >
                 <SImg src={myLikedRecipe && myLikedRecipe.image} alt="料理" />
-                <Typography
-                  variant="body1"
-                  fontWeight="bold"
+                <Box
                   marginLeft="10px"
-                  marginTop="5px"
+                  display="flex"
+                  flexDirection="column"
+                  justifyContent="space-around"
                 >
-                  {myLikedRecipe.title}
-                </Typography>
+                  <Typography variant="body1" fontWeight="bold" marginTop="5px">
+                    {myLikedRecipe.title}
+                  </Typography>
+                  <Box display="flex">
+                    <FavoriteIcon color="error" />
+                    <Typography
+                      variant="body1"
+                      fontWeight="500"
+                      marginLeft="5px"
+                      marginTop="2px"
+                    >
+                      {myLikedRecipe.likes_count}
+                    </Typography>
+                  </Box>
+                </Box>
               </SListBox>
             );
           })}
