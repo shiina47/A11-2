@@ -10,6 +10,7 @@ import {
   TableContainer,
   TableHead,
   TableRow,
+  Typography,
 } from "@mui/material";
 
 export const TextFieldMaterial = memo((props) => {
@@ -54,17 +55,31 @@ export const TextFieldMaterial = memo((props) => {
   return (
     <>
       <Box mt={2} display="flex" flexDirection="column">
-        <h4>食材</h4>
+        <Typography fontWeight="bold" variant="h5" color="text.primary">
+          食材
+        </Typography>
         <Box mb={4}>
           <TableContainer>
             <Table>
               <TableHead>
                 <TableRow>
                   <TableCell>
-                    <strong>材料・調味料</strong>
+                    <Typography
+                      fontWeight="bold"
+                      variant="body1"
+                      color="text.primary"
+                    >
+                      材料・調味料
+                    </Typography>
                   </TableCell>
                   <TableCell>
-                    <strong>分量</strong>
+                    <Typography
+                      fontWeight="bold"
+                      variant="body1"
+                      color="text.primary"
+                    >
+                      分量
+                    </Typography>
                   </TableCell>
                 </TableRow>
               </TableHead>

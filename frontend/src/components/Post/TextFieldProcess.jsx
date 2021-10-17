@@ -1,5 +1,5 @@
 import { memo, useState } from "react";
-import { TextField, Box, Button } from "@mui/material";
+import { TextField, Box, Button, Typography } from "@mui/material";
 
 export const TextFieldProcess = memo((props) => {
   console.log("test");
@@ -42,7 +42,9 @@ export const TextFieldProcess = memo((props) => {
   return (
     <Box>
       <Box mt={2} display="flex" flexDirection="column">
-        <h2>作り方</h2>
+        <Typography fontWeight="bold" variant="h5" color="text.primary">
+          作り方
+        </Typography>
         {(processes || []).map((process) => {
           return (
             <Box display="flex" key={process.order}>
