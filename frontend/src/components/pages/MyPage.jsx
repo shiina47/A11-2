@@ -2,12 +2,12 @@
 import { memo, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { Box, Typography } from "@mui/material";
-import FavoriteIcon from "@mui/icons-material/Favorite";
 
 import styled from "styled-components";
 
 import { useRecipe } from "../../hooks/useRecipe";
 import { TitleDiv } from "../atoms/TitleDiv";
+import { RecipeInfo } from "../MyPage/RecipeInfo";
 
 export const MyPage = memo(() => {
   const { getMyRecipes, myRecipes, getMyLikedRecipes, myLikedRecipes } =
@@ -28,17 +28,7 @@ export const MyPage = memo(() => {
         justifyContent="center"
         alignItems="center"
       >
-        <TitleDiv>
-          <Typography
-            variant="h6"
-            fontWeight="bold"
-            color="white"
-            textAlign="center"
-            mt={1}
-          >
-            投稿したレシピ
-          </Typography>
-        </TitleDiv>
+        <TitleDiv>投稿したレシピ</TitleDiv>
 
         <Box width="370px">
           {myRecipes.map((myRecipe) => {
@@ -53,27 +43,16 @@ export const MyPage = memo(() => {
                 }
               >
                 <SImg src={myRecipe && myRecipe.image} alt="料理" />
-                <Box
-                  marginLeft="10px"
-                  display="flex"
-                  flexDirection="column"
-                  justifyContent="space-around"
-                >
+                <SRecipeBox>
                   <Typography variant="body1" fontWeight="bold" marginTop="5px">
                     {myRecipe.title}
                   </Typography>
-                  <Box display="flex">
-                    <FavoriteIcon color="error" />
-                    <Typography
-                      variant="body1"
-                      fontWeight="500"
-                      marginLeft="5px"
-                      marginTop="2px"
-                    >
-                      {myRecipe.likes_count}
-                    </Typography>
-                  </Box>
-                </Box>
+                  <RecipeInfo
+                    likes_count={myRecipe.likes_count}
+                    minutes={myRecipe.minutes}
+                    cost={myRecipe.cost}
+                  />
+                </SRecipeBox>
               </SListBox>
             );
           })}
@@ -86,17 +65,7 @@ export const MyPage = memo(() => {
         justifyContent="center"
         alignItems="center"
       >
-        <TitleDiv>
-          <Typography
-            variant="h6"
-            fontWeight="bold"
-            color="white"
-            textAlign="center"
-            mt={1}
-          >
-            お気に入りのレシピ
-          </Typography>
-        </TitleDiv>
+        <TitleDiv>お気に入りのレシピ</TitleDiv>
 
         <Box width="370px">
           {myLikedRecipes.map((myLikedRecipe) => {
@@ -111,27 +80,16 @@ export const MyPage = memo(() => {
                 }
               >
                 <SImg src={myLikedRecipe && myLikedRecipe.image} alt="料理" />
-                <Box
-                  marginLeft="10px"
-                  display="flex"
-                  flexDirection="column"
-                  justifyContent="space-around"
-                >
+                <SRecipeBox>
                   <Typography variant="body1" fontWeight="bold" marginTop="5px">
                     {myLikedRecipe.title}
                   </Typography>
-                  <Box display="flex">
-                    <FavoriteIcon color="error" />
-                    <Typography
-                      variant="body1"
-                      fontWeight="500"
-                      marginLeft="5px"
-                      marginTop="2px"
-                    >
-                      {myLikedRecipe.likes_count}
-                    </Typography>
-                  </Box>
-                </Box>
+                  <RecipeInfo
+                    likes_count={myLikedRecipe.likes_count}
+                    minutes={myLikedRecipe.minutes}
+                    cost={myLikedRecipe.cost}
+                  />
+                </SRecipeBox>
               </SListBox>
             );
           })}
@@ -140,6 +98,13 @@ export const MyPage = memo(() => {
     </Box>
   );
 });
+
+const SRecipeBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-left: 10px;
+`;
 
 const SListBox = styled.div`
   padding: 5px;

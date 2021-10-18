@@ -1,11 +1,22 @@
 import { memo } from "react";
 import styled from "styled-components";
+import { Typography } from "@mui/material";
 
 export const TitleDiv = memo((props) => {
   const { children } = props;
   return (
     <>
-      <STitleDiv>{children}</STitleDiv>
+      <STitleDiv>
+        <Typography
+          variant="h6"
+          fontWeight="bold"
+          color="white"
+          textAlign="center"
+          mt={1}
+        >
+          {children}
+        </Typography>
+      </STitleDiv>
     </>
   );
 });
