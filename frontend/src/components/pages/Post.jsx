@@ -1,13 +1,15 @@
 import { memo, useState } from "react";
-import { TextFieldMaterial } from "../atoms/TextFieldMaterial";
-import { TextFieldProcess } from "../atoms/TextFieldProcess";
+import { Box, Stack, Typography, Alert } from "@mui/material";
+
+import { TextFieldMaterial } from "../Post/TextFieldMaterial";
+import { TextFieldProcess } from "../Post/TextFieldProcess";
 import { useRecipe } from "../../hooks/useRecipe";
 import { useMaterial } from "../../hooks/useMaterial";
 import { useProcess } from "../../hooks/useProcess";
-
-import { TextField, Box, Button, Stack, IconButton, Grid } from "@mui/material";
-import AddPhotoAlternateIcon from "@mui/icons-material/AddPhotoAlternate";
 import { useHistory } from "react-router-dom";
+import { InputField } from "../atoms/InputField";
+import { PrimaryBtn } from "../atoms/PrimaryBtn";
+import { InputFile } from "../Post/InputFile";
 
 const initialState = {
   title: "",
@@ -20,6 +22,7 @@ const initialState = {
 export const Post = memo(() => {
   const [recipeForm, setRecipeForm] = useState(initialState);
   const [image, setImage] = useState(null);
+  const [alert, setAlert] = useState(false);
 
   const [materials, setMaterials] = useState([]);
   const [processes, setProcesses] = useState([]);
@@ -62,7 +65,9 @@ export const Post = memo(() => {
   return (
     <>
       <Box my={4} mx="auto" width={300}>
-        <h2>レシピ投稿</h2>
+        <Typography fontWeight="bold" variant="h5" color="text.primary">
+          レシピ投稿
+        </Typography>
         <Box>
           <Stack spacing={2}>
             <input
@@ -70,47 +75,97 @@ export const Post = memo(() => {
               name="image"
               id="imageInput"
               hidden={true}
-              onChange={(e) => setImage(e.target.files[0])}
+              onChange={(e) => {
+                setImage(e.target.files[0]);
+                setAlert(!alert);
+              }}
             />
-            <h4>写真を投稿</h4>
-            <IconButton onClick={handlerEditPicture} size="large">
-              <AddPhotoAlternateIcon color="secondary" fontSize="large" />
-            </IconButton>
-            <Grid container spacing={2}>
-              <h4>タイトル</h4>
-              <Grid item xs={12}>
-                <TextField
-                  name="title"
-                  placeholder="例：親子丼"
-                  value={recipeForm.title}
-                  onChange={handleChange}
-                />
-              </Grid>
-              <Grid item xs={10}>
-                <TextField
-                  type="number"
-                  name="cost"
-                  placeholder="例：100"
-                  value={recipeForm.cost}
-                  onChange={handleChange}
-                />
-              </Grid>
-              <Grid item xs={2}>
-                <p>円</p>
-              </Grid>
-              <Grid item xs={10}>
-                <TextField
+            <Typography fontWeight="bold" variant="body1" color="text.primary">
+              写真
+            </Typography>
+            <Box display="flex" justifyContent="center" flexDirection="column">
+              <InputFile onClick={handlerEditPicture}>ファイルを選択</InputFile>
+              {alert ? (
+                <Box mt={2}>
+                  <Alert severity="success">写真を選択しました</Alert>
+                </Box>
+              ) : (
+                <></>
+              )}
+            </Box>
+
+            <Box>
+              <Typography
+                fontWeight="bold"
+                variant="body1"
+                color="text.primary"
+              >
+                タイトル
+              </Typography>
+              <InputField
+                type="text"
+                name="title"
+                placeholder="例：親子丼"
+                value={recipeForm.title}
+                onChange={handleChange}
+              />
+            </Box>
+            <Box>
+              <Typography
+                fontWeight="bold"
+                variant="body1"
+                color="text.primary"
+              >
+                調理時間
+              </Typography>
+              <Box display="flex">
+                <InputField
                   type="number"
                   name="minutes"
                   placeholder="例：5"
                   value={recipeForm.minutes}
                   onChange={handleChange}
                 />
-              </Grid>
-              <Grid item xs={2}>
-                <p>分</p>
-              </Grid>
-            </Grid>
+
+                <Typography
+                  variant="body1"
+                  color="text.secondary"
+                  fontWeight="bold"
+                  alignSelf="flex-end"
+                  marginLeft="2px"
+                >
+                  分
+                </Typography>
+              </Box>
+            </Box>
+
+            <Box>
+              <Typography
+                fontWeight="bold"
+                variant="body1"
+                color="text.primary"
+              >
+                費用
+              </Typography>
+              <Box display="flex">
+                <InputField
+                  type="number"
+                  name="cost"
+                  placeholder="例：100"
+                  value={recipeForm.cost}
+                  onChange={handleChange}
+                />
+                <Typography
+                  variant="body1"
+                  color="text.secondary"
+                  fontWeight="bold"
+                  alignSelf="flex-end"
+                  marginLeft="2px"
+                >
+                  円
+                </Typography>
+              </Box>
+            </Box>
           </Stack>
         </Box>
 
@@ -123,10 +178,8 @@ export const Post = memo(() => {
 
         <TextFieldProcess processes={processes} setProcesses={setProcesses} />
 
-        <Box mt={4}>
-          <Button sx={{ width: "100%" }} onClick={onSubmit} variant="contained">
-            投稿する
-          </Button>
+        <Box display="flex" justifyContent="center" mt={4}>
+          <PrimaryBtn onClick={onSubmit}>投稿する</PrimaryBtn>
         </Box>
       </Box>
     </>

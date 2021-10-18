@@ -1,16 +1,16 @@
 import { memo, useState } from "react";
 import {
-  TextField,
   Box,
-  Button,
-  Grid,
   Table,
   TableBody,
   TableCell,
   TableContainer,
   TableHead,
   TableRow,
+  Typography,
 } from "@mui/material";
+import { InputField } from "../atoms/InputField";
+import { AddBtn } from "../atoms/AddBtn";
 
 export const TextFieldMaterial = memo((props) => {
   const { materials, setMaterials } = props;
@@ -54,17 +54,31 @@ export const TextFieldMaterial = memo((props) => {
   return (
     <>
       <Box mt={2} display="flex" flexDirection="column">
-        <h4>食材</h4>
-        <Box mb={4}>
+        <Typography fontWeight="bold" variant="body1" color="text.primary">
+          食材
+        </Typography>
+        <Box mb={2}>
           <TableContainer>
             <Table>
               <TableHead>
                 <TableRow>
                   <TableCell>
-                    <strong>材料・調味料</strong>
+                    <Typography
+                      fontWeight="bold"
+                      variant="body2"
+                      color="text.primary"
+                    >
+                      材料・調味料
+                    </Typography>
                   </TableCell>
                   <TableCell>
-                    <strong>分量</strong>
+                    <Typography
+                      fontWeight="bold"
+                      variant="body2"
+                      color="text.primary"
+                    >
+                      分量
+                    </Typography>
                   </TableCell>
                 </TableRow>
               </TableHead>
@@ -80,39 +94,30 @@ export const TextFieldMaterial = memo((props) => {
           </TableContainer>
         </Box>
 
-        <Grid container spacing={2}>
-          <Grid item xs={6}>
-            <TextField
-              inputProps={{
-                autoComplete: "off",
-              }}
+        <Box display="flex">
+          <Box>
+            <InputField
+              type="text"
               id="nameField"
-              label="材料・調味料"
               placeholder="例：鶏むね肉"
               name="name"
-              variant="outlined"
               onChange={handleAddFormChange}
             />
-          </Grid>
-          <Grid item xs={6}>
-            <TextField
-              inputProps={{
-                autoComplete: "off",
-              }}
+          </Box>
+
+          <Box marginLeft="2px">
+            <InputField
+              type="text"
               id="materialField"
-              label="分量"
               placeholder="例：200g"
               name="amount"
-              variant="outlined"
               onChange={handleAddFormChange}
             />
-          </Grid>
-        </Grid>
+          </Box>
+        </Box>
 
         <Box mt={2} display="flex" justifyContent="center">
-          <Button variant="contained" onClick={handleAddFormSubmit}>
-            追加する
-          </Button>
+          <AddBtn onClick={handleAddFormSubmit}>追加する</AddBtn>
         </Box>
       </Box>
     </>

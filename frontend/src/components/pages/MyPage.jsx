@@ -1,7 +1,9 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { memo, useEffect } from "react";
 import { useHistory } from "react-router-dom";
-import { Box, Typography, List, ListItem, ListItemText } from "@mui/material";
+import { Box, Typography } from "@mui/material";
+
+import styled from "styled-components";
 
 import { useRecipe } from "../../hooks/useRecipe";
 
@@ -24,40 +26,43 @@ export const MyPage = memo(() => {
         justifyContent="center"
         alignItems="center"
       >
-        <Box
-          sx={{ borderBottom: 2 }}
-          display="flex"
-          justifyContent="center"
-          width="350px"
-        >
+        <STitleDiv>
           <Typography
-            sx={{ mt: 4, mb: 2 }}
             variant="h6"
-            component="div"
-            borderBottom="1"
             fontWeight="bold"
+            color="white"
+            textAlign="center"
+            mt={1}
           >
             投稿したレシピ
           </Typography>
-        </Box>
+        </STitleDiv>
 
-        <List>
+        <Box width="370px">
           {myRecipes.map((myRecipe) => {
             return (
-              <ListItem key={myRecipe.id} button>
-                <ListItemText
-                  primary={myRecipe.title}
-                  onClick={() =>
-                    history.push({
-                      pathname: "/detail",
-                      state: { id: myRecipe.id },
-                    })
-                  }
-                />
-              </ListItem>
+              <SListBox
+                key={myRecipe.id}
+                onClick={() =>
+                  history.push({
+                    pathname: "/detail",
+                    state: { id: myRecipe.id },
+                  })
+                }
+              >
+                <SImg src={myRecipe && myRecipe.image} alt="料理" />
+                <Typography
+                  variant="body1"
+                  fontWeight="bold"
+                  marginLeft="10px"
+                  marginTop="5px"
+                >
+                  {myRecipe.title}
+                </Typography>
+              </SListBox>
             );
           })}
-        </List>
+        </Box>
       </Box>
 
       <Box
@@ -66,41 +71,71 @@ export const MyPage = memo(() => {
         justifyContent="center"
         alignItems="center"
       >
-        <Box
-          sx={{ borderBottom: 2 }}
-          display="flex"
-          justifyContent="center"
-          width="350px"
-        >
+        <STitleDiv>
           <Typography
-            sx={{ mt: 4, mb: 2 }}
             variant="h6"
-            component="div"
-            borderBottom="1"
             fontWeight="bold"
+            color="white"
+            textAlign="center"
+            mt={1}
           >
             お気に入りのレシピ
           </Typography>
-        </Box>
+        </STitleDiv>
 
-        <List>
+        <Box width="370px">
           {myLikedRecipes.map((myLikedRecipe) => {
             return (
-              <ListItem key={myLikedRecipe.id} button>
-                <ListItemText
-                  primary={myLikedRecipe.title}
-                  onClick={() =>
-                    history.push({
-                      pathname: "/detail",
-                      state: { id: myLikedRecipe.id },
-                    })
-                  }
-                />
-              </ListItem>
+              <SListBox
+                key={myLikedRecipe.id}
+                onClick={() =>
+                  history.push({
+                    pathname: "/detail",
+                    state: { id: myLikedRecipe.id },
+                  })
+                }
+              >
+                <SImg src={myLikedRecipe && myLikedRecipe.image} alt="料理" />
+                <Typography
+                  variant="body1"
+                  fontWeight="bold"
+                  marginLeft="10px"
+                  marginTop="5px"
+                >
+                  {myLikedRecipe.title}
+                </Typography>
+              </SListBox>
             );
           })}
-        </List>
+        </Box>
       </Box>
     </Box>
   );
 });
+
+const STitleDiv = styled.div`
+  display: flex;
+  justify-content: center;
+  width: 350px;
+  height: 40px;
+  margin-top: 10px;
+  background-color: rgba(250, 178, 35, 0.9);
+  border-radius: 10px;
+`;
+
+const SListBox = styled.div`
+  padding: 5px;
+  border-radius: 5px;
+  background-color: #ffffffef;
+  cursor: pointer;
+  display: flex;
+  margin: 10px;
+`;
+
+const SImg = styled.img`
+  height: 100px;
+  width: 100px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin: 2px;
+`;
