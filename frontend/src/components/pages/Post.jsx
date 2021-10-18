@@ -46,7 +46,6 @@ export const Post = memo(() => {
     recipeForm.image = image;
     const responseData = await createRecipe(recipeForm);
     const id = responseData.id;
-    console.log(id);
     materials.map((material) => {
       return createMaterial(material, id);
     });
