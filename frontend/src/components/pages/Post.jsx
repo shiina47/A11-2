@@ -46,7 +46,6 @@ export const Post = memo(() => {
     recipeForm.image = image;
     const responseData = await createRecipe(recipeForm);
     const id = responseData.id;
-    console.log(id);
     materials.map((material) => {
       return createMaterial(material, id);
     });
@@ -66,17 +65,7 @@ export const Post = memo(() => {
   return (
     <>
       <Box my={4} mx="auto" width={370}>
-        <TitleDiv>
-          <Typography
-            variant="h6"
-            fontWeight="bold"
-            color="white"
-            textAlign="center"
-            mt={1}
-          >
-            レシピ投稿
-          </Typography>
-        </TitleDiv>
+        <TitleDiv>レシピ投稿</TitleDiv>
 
         <Box paddingX={2}>
           <input

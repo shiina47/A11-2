@@ -56,9 +56,3 @@ class RecipeSerializer(serializers.ModelSerializer):
     def get_likes_count(self, obj):
         return obj.liked.count()
 
-    def create(self, validated_data):
-        processes_data = validated_data.pop('process')
-        recipe = Recipe.objects.create(**validated_data)
-        for process_data in processes_data:
-            Process.objects.create(album=album, **process_data)
-        return recipe
