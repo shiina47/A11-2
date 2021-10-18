@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import Box from "@mui/material/Box";
-import TextField from "@mui/material/TextField";
-import Button from "@mui/material/Button";
+import { Box, TextField, Typography } from "@mui/material";
+
 import { useAuth } from "../../hooks/useAuth";
+import { LoginBtn } from "./LoginBtn";
 
 export default function Register() {
   const [email, setEmail] = useState("");
@@ -24,20 +24,36 @@ export default function Register() {
   };
 
   return (
-    <Box sx={{
-      display: "flex",
-      alignItems: "center",
-      flexDirection: "column",
-      width: "100%"
-      }}
-    >
-      <h1 style={{ fontSize: "50px" }}>Reciper</h1>
-      <h3>ユーザー登録</h3>
-      <Box sx={{
+    <Box
+      sx={{
         display: "flex",
         alignItems: "center",
         flexDirection: "column",
-        width: "100%"
+        width: "100%",
+      }}
+    >
+      <Typography
+        variant="h2"
+        fontWeight="bold"
+        color="text.primary"
+        style={{ fontSize: "50px" }}
+      >
+        Reciper
+      </Typography>
+      <Typography
+        variant="h6"
+        marginTop="50px"
+        fontWeight="bold"
+        color="text.primary"
+      >
+        ユーザー登録
+      </Typography>
+      <Box
+        sx={{
+          display: "flex",
+          alignItems: "center",
+          flexDirection: "column",
+          width: "100%",
         }}
       >
         <TextField
@@ -66,13 +82,7 @@ export default function Register() {
         />
       </Box>
       <Box sx={{ width: "100%" }}>
-        <Button
-          sx={{ margin: "8px 0px", width: "100%" }}
-          variant="contained"
-          onClick={onClickRegister}
-        >
-          ユーザー登録
-        </Button>
+        <LoginBtn onClick={onClickRegister}>ユーザー登録</LoginBtn>
       </Box>
     </Box>
   );

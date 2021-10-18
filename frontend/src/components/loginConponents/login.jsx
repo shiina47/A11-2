@@ -1,8 +1,7 @@
 import React, { useState } from "react";
-import Box from "@mui/material/Box";
-import TextField from "@mui/material/TextField";
-import Button from "@mui/material/Button";
+import { Box, TextField, Typography } from "@mui/material";
 import { useAuth } from "../../hooks/useAuth";
+import { LoginBtn } from "./LoginBtn";
 
 export default function Login() {
   const [mail, setMail] = useState("");
@@ -18,20 +17,36 @@ export default function Login() {
   };
 
   return (
-    <Box sx={{      
-      display: "flex",
-      alignItems: "center",
-      flexDirection: "column",
-      width: "100%"
-      }}
-    >
-      <h1 style={{ fontSize: "50px" }}>Reciper</h1>
-      <h3>ログイン</h3>
-      <Box sx={{          
+    <Box
+      sx={{
         display: "flex",
         alignItems: "center",
         flexDirection: "column",
-        width: "100%"
+        width: "100%",
+      }}
+    >
+      <Typography
+        variant="h2"
+        fontWeight="bold"
+        color="text.primary"
+        style={{ fontSize: "50px" }}
+      >
+        Reciper
+      </Typography>
+      <Typography
+        variant="h6"
+        marginTop="50px"
+        fontWeight="bold"
+        color="text.primary"
+      >
+        ログイン
+      </Typography>
+      <Box
+        sx={{
+          display: "flex",
+          alignItems: "center",
+          flexDirection: "column",
+          width: "100%",
         }}
       >
         <TextField
@@ -52,13 +67,7 @@ export default function Login() {
         />
       </Box>
       <Box sx={{ width: "100%" }}>
-        <Button
-          sx={{ margin: "8px 0px", width: "100%" }}
-          variant="contained"
-          onClick={onClickLogin}
-        >
-          ログイン
-        </Button>
+        <LoginBtn onClick={onClickLogin}>ログイン</LoginBtn>
       </Box>
     </Box>
   );

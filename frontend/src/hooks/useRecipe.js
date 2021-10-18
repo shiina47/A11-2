@@ -15,13 +15,15 @@ export const useRecipe = () => {
       },
     });
 
-    axios
-      .get(`http://127.0.0.1:8000/api/recipe/?user=${res.data.id}`, {
+    const responseRecipes = await axios.get(
+      `http://127.0.0.1:8000/api/recipe/?user=${res.data.id}`,
+      {
         headers: {
           Authorization: `JWT ${localStorage.localJWT}`,
         },
-      })
-      .then((res) => setMyRecipes(res.data));
+      }
+    );
+    setMyRecipes(responseRecipes.data);
   });
 
   const getSelectedRecipe = useCallback(async (id) => {

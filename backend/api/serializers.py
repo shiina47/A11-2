@@ -44,12 +44,17 @@ class RecipeSerializer(serializers.ModelSerializer):
     material = serializers.StringRelatedField(many=True)
     process = ProcessSerializer(many=True, read_only=True)
 
+    likes_count = serializers.SerializerMethodField()
+
     class Meta:
         model = Recipe
 
         extra_kwargs = {'user': {'read_only': True}}
         fields = ('id', 'title', 'cost', 'amount', 'minutes', 'image', 'user', 'liked', 'isDisplayed',
-                  'created_at', 'updated_at', 'material', 'process')
+                  'created_at', 'updated_at', 'material', 'process', 'likes_count')
+
+    def get_likes_count(self, obj):
+        return obj.liked.count()
 
     def create(self, validated_data):
         processes_data = validated_data.pop('process')

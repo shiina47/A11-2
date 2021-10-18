@@ -6,6 +6,8 @@ import { Box, Typography } from "@mui/material";
 import styled from "styled-components";
 
 import { useRecipe } from "../../hooks/useRecipe";
+import { TitleDiv } from "../atoms/TitleDiv";
+import { RecipeInfo } from "../MyPage/RecipeInfo";
 
 export const MyPage = memo(() => {
   const { getMyRecipes, myRecipes, getMyLikedRecipes, myLikedRecipes } =
@@ -26,17 +28,7 @@ export const MyPage = memo(() => {
         justifyContent="center"
         alignItems="center"
       >
-        <STitleDiv>
-          <Typography
-            variant="h6"
-            fontWeight="bold"
-            color="white"
-            textAlign="center"
-            mt={1}
-          >
-            投稿したレシピ
-          </Typography>
-        </STitleDiv>
+        <TitleDiv>投稿したレシピ</TitleDiv>
 
         <Box width="370px">
           {myRecipes.map((myRecipe) => {
@@ -51,14 +43,16 @@ export const MyPage = memo(() => {
                 }
               >
                 <SImg src={myRecipe && myRecipe.image} alt="料理" />
-                <Typography
-                  variant="body1"
-                  fontWeight="bold"
-                  marginLeft="10px"
-                  marginTop="5px"
-                >
-                  {myRecipe.title}
-                </Typography>
+                <SRecipeBox>
+                  <Typography variant="body1" fontWeight="bold" marginTop="5px">
+                    {myRecipe.title}
+                  </Typography>
+                  <RecipeInfo
+                    likes_count={myRecipe.likes_count}
+                    minutes={myRecipe.minutes}
+                    cost={myRecipe.cost}
+                  />
+                </SRecipeBox>
               </SListBox>
             );
           })}
@@ -71,17 +65,7 @@ export const MyPage = memo(() => {
         justifyContent="center"
         alignItems="center"
       >
-        <STitleDiv>
-          <Typography
-            variant="h6"
-            fontWeight="bold"
-            color="white"
-            textAlign="center"
-            mt={1}
-          >
-            お気に入りのレシピ
-          </Typography>
-        </STitleDiv>
+        <TitleDiv>お気に入りのレシピ</TitleDiv>
 
         <Box width="370px">
           {myLikedRecipes.map((myLikedRecipe) => {
@@ -96,14 +80,16 @@ export const MyPage = memo(() => {
                 }
               >
                 <SImg src={myLikedRecipe && myLikedRecipe.image} alt="料理" />
-                <Typography
-                  variant="body1"
-                  fontWeight="bold"
-                  marginLeft="10px"
-                  marginTop="5px"
-                >
-                  {myLikedRecipe.title}
-                </Typography>
+                <SRecipeBox>
+                  <Typography variant="body1" fontWeight="bold" marginTop="5px">
+                    {myLikedRecipe.title}
+                  </Typography>
+                  <RecipeInfo
+                    likes_count={myLikedRecipe.likes_count}
+                    minutes={myLikedRecipe.minutes}
+                    cost={myLikedRecipe.cost}
+                  />
+                </SRecipeBox>
               </SListBox>
             );
           })}
@@ -113,14 +99,11 @@ export const MyPage = memo(() => {
   );
 });
 
-const STitleDiv = styled.div`
+const SRecipeBox = styled.div`
   display: flex;
-  justify-content: center;
-  width: 350px;
-  height: 40px;
-  margin-top: 10px;
-  background-color: rgba(250, 178, 35, 0.9);
-  border-radius: 10px;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-left: 10px;
 `;
 
 const SListBox = styled.div`

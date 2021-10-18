@@ -3,30 +3,31 @@ import { Typography } from "@mui/material";
 
 import styled from "styled-components";
 
-export const InputFile = memo((props) => {
+export const LoginBtn = memo((props) => {
   const { onClick, children } = props;
   return (
     <>
-      <SPrimaryBtn onClick={onClick}>
+      <SLoginBtn onClick={onClick}>
         <Typography variant="body1" fontWeight="bold">
           {children}
         </Typography>
-      </SPrimaryBtn>
+      </SLoginBtn>
     </>
   );
 });
 
-const SPrimaryBtn = styled.div`
+const SLoginBtn = styled.div`
   display: flex;
   justify-content: center;
-  width: 150px;
+  width: 250px;
   height: 20px;
   margin: 0 auto;
+  margin-top: 15px;
   padding: 10px;
   color: #ffffff;
-  border-radius: 50vh;
+  border-radius: 60vh;
   transition: 0.3s;
-  background-color: rgba(250, 178, 35, 0.9);
+  background-color: #ff9800;
   &:hover {
     opacity: 0.8;
     cursor: pointer;

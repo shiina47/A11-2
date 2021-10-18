@@ -1,5 +1,5 @@
 import { memo, useState } from "react";
-import { Box, Stack, Typography, Alert } from "@mui/material";
+import { Box, Typography, Alert } from "@mui/material";
 
 import { TextFieldMaterial } from "../Post/TextFieldMaterial";
 import { TextFieldProcess } from "../Post/TextFieldProcess";
@@ -10,6 +10,7 @@ import { useHistory } from "react-router-dom";
 import { InputField } from "../atoms/InputField";
 import { PrimaryBtn } from "../atoms/PrimaryBtn";
 import { InputFile } from "../Post/InputFile";
+import { TitleDiv } from "../atoms/TitleDiv";
 
 const initialState = {
   title: "",
@@ -64,44 +65,58 @@ export const Post = memo(() => {
 
   return (
     <>
-      <Box my={4} mx="auto" width={300}>
-        <Typography fontWeight="bold" variant="h5" color="text.primary">
-          レシピ投稿
-        </Typography>
-        <Box>
-          <Stack spacing={2}>
-            <input
-              type="file"
-              name="image"
-              id="imageInput"
-              hidden={true}
-              onChange={(e) => {
-                setImage(e.target.files[0]);
-                setAlert(!alert);
-              }}
-            />
-            <Typography fontWeight="bold" variant="body1" color="text.primary">
-              写真
-            </Typography>
-            <Box display="flex" justifyContent="center" flexDirection="column">
-              <InputFile onClick={handlerEditPicture}>ファイルを選択</InputFile>
-              {alert ? (
-                <Box mt={2}>
-                  <Alert severity="success">写真を選択しました</Alert>
-                </Box>
-              ) : (
-                <></>
-              )}
-            </Box>
+      <Box my={4} mx="auto" width={370}>
+        <TitleDiv>
+          <Typography
+            variant="h6"
+            fontWeight="bold"
+            color="white"
+            textAlign="center"
+            mt={1}
+          >
+            レシピ投稿
+          </Typography>
+        </TitleDiv>
 
-            <Box>
-              <Typography
-                fontWeight="bold"
-                variant="body1"
-                color="text.primary"
-              >
-                タイトル
-              </Typography>
+        <Box paddingX={2}>
+          <input
+            type="file"
+            name="image"
+            id="imageInput"
+            hidden={true}
+            onChange={(e) => {
+              setImage(e.target.files[0]);
+              setAlert(!alert);
+            }}
+          />
+          <Typography
+            fontWeight="regular"
+            variant="body1"
+            color="text.primary"
+            marginTop={2}
+          >
+            写真
+          </Typography>
+          <Box display="flex" justifyContent="center" flexDirection="column">
+            <InputFile onClick={handlerEditPicture}>ファイルを選択</InputFile>
+            {alert ? (
+              <Box mt={2}>
+                <Alert severity="success">写真を選択しました</Alert>
+              </Box>
+            ) : (
+              <></>
+            )}
+          </Box>
+
+          <Box marginTop={2}>
+            <Typography
+              fontWeight="regular"
+              variant="body1"
+              color="text.primary"
+            >
+              タイトル
+            </Typography>
+            <Box width="325px">
               <InputField
                 type="text"
                 name="title"
@@ -110,74 +125,74 @@ export const Post = memo(() => {
                 onChange={handleChange}
               />
             </Box>
-            <Box>
-              <Typography
-                fontWeight="bold"
-                variant="body1"
-                color="text.primary"
-              >
-                調理時間
-              </Typography>
-              <Box display="flex">
-                <InputField
-                  type="number"
-                  name="minutes"
-                  placeholder="例：5"
-                  value={recipeForm.minutes}
-                  onChange={handleChange}
-                />
+          </Box>
+          <Box marginTop={2}>
+            <Typography
+              fontWeight="regular"
+              variant="body1"
+              color="text.primary"
+            >
+              調理時間
+            </Typography>
+            <Box display="flex">
+              <InputField
+                type="number"
+                name="minutes"
+                placeholder="例：5"
+                value={recipeForm.minutes}
+                onChange={handleChange}
+              />
 
-                <Typography
-                  variant="body1"
-                  color="text.secondary"
-                  fontWeight="bold"
-                  alignSelf="flex-end"
-                  marginLeft="2px"
-                >
-                  分
-                </Typography>
-              </Box>
-            </Box>
-
-            <Box>
               <Typography
-                fontWeight="bold"
                 variant="body1"
-                color="text.primary"
+                color="text.secondary"
+                fontWeight="bold"
+                alignSelf="flex-end"
+                marginLeft="2px"
               >
-                費用
+                分
               </Typography>
-              <Box display="flex">
-                <InputField
-                  type="number"
-                  name="cost"
-                  placeholder="例：100"
-                  value={recipeForm.cost}
-                  onChange={handleChange}
-                />
-                <Typography
-                  variant="body1"
-                  color="text.secondary"
-                  fontWeight="bold"
-                  alignSelf="flex-end"
-                  marginLeft="2px"
-                >
-                  円
-                </Typography>
-              </Box>
             </Box>
-          </Stack>
+          </Box>
+
+          <Box marginTop={2}>
+            <Typography
+              fontWeight="regular"
+              variant="body1"
+              color="text.primary"
+            >
+              費用
+            </Typography>
+            <Box display="flex">
+              <InputField
+                type="number"
+                name="cost"
+                placeholder="例：100"
+                value={recipeForm.cost}
+                onChange={handleChange}
+              />
+              <Typography
+                variant="body1"
+                color="text.secondary"
+                fontWeight="bold"
+                alignSelf="flex-end"
+                marginLeft="2px"
+              >
+                円
+              </Typography>
+            </Box>
+          </Box>
         </Box>
 
-        <Box my={2}>
+        <Box p={2} paddingBottom={0}>
           <TextFieldMaterial
             materials={materials}
             setMaterials={setMaterials}
           />
         </Box>
-
-        <TextFieldProcess processes={processes} setProcesses={setProcesses} />
-
+        <Box p={2} paddingBottom={0}>
+          <TextFieldProcess processes={processes} setProcesses={setProcesses} />
+        </Box>
         <Box display="flex" justifyContent="center" mt={4}>
           <PrimaryBtn onClick={onSubmit}>投稿する</PrimaryBtn>
         </Box>

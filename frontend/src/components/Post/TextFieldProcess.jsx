@@ -1,5 +1,13 @@
 import { memo, useState } from "react";
-import { TextField, Box, Typography } from "@mui/material";
+import {
+  TextField,
+  Box,
+  Typography,
+  Snackbar,
+  Alert,
+  IconButton,
+} from "@mui/material";
+import CloseIcon from "@mui/icons-material/Close";
 import { AddBtn } from "../atoms/AddBtn";
 
 export const TextFieldProcess = memo((props) => {
@@ -10,6 +18,7 @@ export const TextFieldProcess = memo((props) => {
     how_to: "",
   });
   const [order, setOrder] = useState(1);
+  const [isAlert, setIsAlert] = useState(false);
 
   const handleAddFormChangeP = (event) => {
     event.preventDefault();
@@ -26,6 +35,10 @@ export const TextFieldProcess = memo((props) => {
   const handleAddFormSubmitP = (event) => {
     event.preventDefault();
 
+    if (addFormDataP.how_to === "") {
+      return setIsAlert(!isAlert);
+    }
+
     const newProcess = {
       order: order,
       how_to: addFormDataP.how_to,
@@ -34,16 +47,16 @@ export const TextFieldProcess = memo((props) => {
     const newProcesses = [...processes, newProcess];
     setProcesses(newProcesses);
     setOrder((pre) => pre + 1);
-
-    let processForm = document.getElementById("processField");
-    processForm.value = "";
-    console.log(processes);
+    setAddFormDataP({
+      order: "",
+      how_to: "",
+    });
   };
 
   return (
     <Box>
       <Box mt={2} display="flex" flexDirection="column">
-        <Typography fontWeight="bold" variant="body1" color="text.primary">
+        <Typography fontWeight="regular" variant="body1" color="text.primary">
           作り方
         </Typography>
         {(processes || []).map((process) => {
@@ -59,7 +72,7 @@ export const TextFieldProcess = memo((props) => {
         <Box display="flex" mt={2}>
           <Box mr={2}>
             <Typography
-              fontWeight="bold"
+              fontWeight="regular"
               variant="body1"
               color="text.primary"
               alignSelf="flex-start"
@@ -69,7 +82,7 @@ export const TextFieldProcess = memo((props) => {
           </Box>
 
           <TextField
-            id="processField"
+            value={addFormDataP.how_to}
             onChange={handleAddFormChangeP}
             name="how_to"
             multiline
@@ -82,6 +95,33 @@ export const TextFieldProcess = memo((props) => {
         <Box mt={1} display="flex" justifyContent="center">
           <AddBtn onClick={handleAddFormSubmitP}>追加する</AddBtn>
         </Box>
+
+        {isAlert && (
+          <Snackbar
+            anchorOrigin={{ vertical: "top", horizontal: "center" }}
+            open={isAlert}
+            autoHideDuration={3000}
+          >
+            <Alert
+              variant="filled"
+              severity="error"
+              action={
+                <IconButton
+                  aria-label="close"
+                  color="inherit"
+                  size="small"
+                  onClick={() => {
+                    setIsAlert(false);
+                  }}
+                >
+                  <CloseIcon fontSize="inherit" />
+                </IconButton>
+              }
+            >
+              入力してください
+            </Alert>
+          </Snackbar>
+        )}
       </Box>
     </Box>
   );

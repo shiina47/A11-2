@@ -8,7 +8,11 @@ import {
   TableHead,
   TableRow,
   Typography,
+  Snackbar,
+  Alert,
+  IconButton,
 } from "@mui/material";
+import CloseIcon from "@mui/icons-material/Close";
 import { InputField } from "../atoms/InputField";
 import { AddBtn } from "../atoms/AddBtn";
 
@@ -18,6 +22,7 @@ export const TextFieldMaterial = memo((props) => {
     name: "",
     amount: "",
   });
+  const [isAlert, setIsAlert] = useState(false);
 
   const handleAddFormChange = (event) => {
     event.preventDefault();
@@ -34,6 +39,10 @@ export const TextFieldMaterial = memo((props) => {
   const handleAddFormSubmit = (event) => {
     event.preventDefault();
 
+    if (addFormData.name === "" || addFormData.amount === "") {
+      return setIsAlert(!isAlert);
+    }
+
     const newMaterial = {
       name: addFormData.name,
       amount: addFormData.amount,
@@ -44,17 +53,16 @@ export const TextFieldMaterial = memo((props) => {
 
     console.log(newMaterials);
 
-    let nameForm = document.getElementById("nameField");
-    nameForm.value = "";
-
-    let materialForm = document.getElementById("materialField");
-    materialForm.value = "";
+    setAddFormData({
+      name: "",
+      amount: "",
+    });
   };
 
   return (
     <>
       <Box mt={2} display="flex" flexDirection="column">
-        <Typography fontWeight="bold" variant="body1" color="text.primary">
+        <Typography fontWeight="regular" variant="body1" color="text.primary">
           食材
         </Typography>
         <Box mb={2}>
@@ -64,7 +72,7 @@ export const TextFieldMaterial = memo((props) => {
                 <TableRow>
                   <TableCell>
                     <Typography
-                      fontWeight="bold"
+                      fontWeight="regular"
                       variant="body2"
                       color="text.primary"
                     >
@@ -73,7 +81,7 @@ export const TextFieldMaterial = memo((props) => {
                   </TableCell>
                   <TableCell>
                     <Typography
-                      fontWeight="bold"
+                      fontWeight="regular"
                       variant="body2"
                       color="text.primary"
                     >
@@ -94,11 +102,38 @@ export const TextFieldMaterial = memo((props) => {
           </TableContainer>
         </Box>
 
+        {isAlert && (
+          <Snackbar
+            anchorOrigin={{ vertical: "top", horizontal: "center" }}
+            open={isAlert}
+            autoHideDuration={3000}
+          >
+            <Alert
+              variant="filled"
+              severity="error"
+              action={
+                <IconButton
+                  aria-label="close"
+                  color="inherit"
+                  size="small"
+                  onClick={() => {
+                    setIsAlert(false);
+                  }}
+                >
+                  <CloseIcon fontSize="inherit" />
+                </IconButton>
+              }
+            >
+              入力してください
+            </Alert>
+          </Snackbar>
+        )}
+
         <Box display="flex">
           <Box>
             <InputField
               type="text"
-              id="nameField"
+              value={addFormData.name}
               placeholder="例：鶏むね肉"
               name="name"
               onChange={handleAddFormChange}
@@ -108,7 +143,7 @@ export const TextFieldMaterial = memo((props) => {
           <Box marginLeft="2px">
             <InputField
               type="text"
-              id="materialField"
+              value={addFormData.amount}
               placeholder="例：200g"
               name="amount"
               onChange={handleAddFormChange}
