@@ -2,6 +2,7 @@
 import { memo, useEffect } from "react";
 import { useHistory, useLocation } from "react-router-dom";
 import { Box, Typography } from "@mui/material";
+import styled from "styled-components";
 
 import { useRecipe } from "../../hooks/useRecipe";
 import { CookMunites } from "../RecipeDeital/CookMunites";
@@ -40,12 +41,7 @@ export const RecipeDetail = memo(() => {
         {selectedRecipe && selectedRecipe.title}
       </Typography>
       <Box>
-        <img
-          src={selectedRecipe && selectedRecipe.image}
-          height="400px"
-          width="360px"
-          alt="料理"
-        />
+        <SImg src={selectedRecipe && selectedRecipe.image} alt="料理" />
       </Box>
 
       <Box
@@ -65,3 +61,11 @@ export const RecipeDetail = memo(() => {
     </Box>
   );
 });
+
+const SImg = styled.img`
+  height: 400px;
+  width: 360px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin: 2px;
+`;
