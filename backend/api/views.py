@@ -21,7 +21,7 @@ class RecipeViewSet(viewsets.ModelViewSet):
     queryset = Recipe.objects.all()
     serializer_class = RecipeSerializer
     permission_classes = (AllowAny,)
-    filter_fields = ('user', 'liked', 'isDisplayed')
+    filter_fields = ('user', 'liked',)
 
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)

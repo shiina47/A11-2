@@ -50,30 +50,31 @@ export const RecipeDisplay = memo(() => {
 
   useEffect(() => {
     const getAllRecipe = async () => {
-      const res = await axios.get(
-        "http://127.0.0.1:8000/api/recipe/?isDisplayed=false",
-        {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `JWT ${localStorage.localJWT}`,
-          },
-        }
-      );
-
-      console.log(res.data);
-      // res.data.process = await res.data.process.sort(compare);
-
-      setRecipes(res.data);
-      setDisplay(res.data[0]);
-
-      const myId = await axios.get("http://127.0.0.1:8000/api/myself", {
+      const resRecipes = await axios.get("http://127.0.0.1:8000/api/recipe/", {
         headers: {
           "Content-Type": "application/json",
           Authorization: `JWT ${localStorage.localJWT}`,
         },
       });
 
-      setLogInId(myId.data.id);
+      const allRecipes = await resRecipes.data;
+
+      const resMyId = await axios.get("http://127.0.0.1:8000/api/myself", {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `JWT ${localStorage.localJWT}`,
+        },
+      });
+
+      const myId = await resMyId.data.id;
+
+      const isNotDisplayedRecipes = await allRecipes.filter((recipe) => {
+        return !recipe.isDisplayed.includes(myId);
+      });
+
+      setRecipes(isNotDisplayedRecipes);
+      setDisplay(isNotDisplayedRecipes[0]);
+      setLogInId(myId);
     };
 
     getAllRecipe();
