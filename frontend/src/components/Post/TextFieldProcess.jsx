@@ -1,5 +1,13 @@
 import { memo, useState } from "react";
-import { TextField, Box, Typography } from "@mui/material";
+import {
+  TextField,
+  Box,
+  Typography,
+  Snackbar,
+  Alert,
+  IconButton,
+} from "@mui/material";
+import CloseIcon from "@mui/icons-material/Close";
 import { AddBtn } from "../atoms/AddBtn";
 
 export const TextFieldProcess = memo((props) => {
@@ -10,6 +18,7 @@ export const TextFieldProcess = memo((props) => {
     how_to: "",
   });
   const [order, setOrder] = useState(1);
+  const [isAlert, setIsAlert] = useState(true);
 
   const handleAddFormChangeP = (event) => {
     event.preventDefault();
@@ -25,6 +34,10 @@ export const TextFieldProcess = memo((props) => {
 
   const handleAddFormSubmitP = (event) => {
     event.preventDefault();
+
+    if (addFormDataP.how_to === "") {
+      return setIsAlert(!isAlert);
+    }
 
     const newProcess = {
       order: order,
@@ -82,6 +95,31 @@ export const TextFieldProcess = memo((props) => {
         <Box mt={1} display="flex" justifyContent="center">
           <AddBtn onClick={handleAddFormSubmitP}>追加する</AddBtn>
         </Box>
+
+        <Snackbar
+          anchorOrigin={{ vertical: "top", horizontal: "center" }}
+          open={isAlert}
+          autoHideDuration={3000}
+        >
+          <Alert
+            variant="filled"
+            severity="error"
+            action={
+              <IconButton
+                aria-label="close"
+                color="inherit"
+                size="small"
+                onClick={() => {
+                  setIsAlert(false);
+                }}
+              >
+                <CloseIcon fontSize="inherit" />
+              </IconButton>
+            }
+          >
+            入力してください
+          </Alert>
+        </Snackbar>
       </Box>
     </Box>
   );

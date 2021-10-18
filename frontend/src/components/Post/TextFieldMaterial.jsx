@@ -8,7 +8,11 @@ import {
   TableHead,
   TableRow,
   Typography,
+  Snackbar,
+  Alert,
+  IconButton,
 } from "@mui/material";
+import CloseIcon from "@mui/icons-material/Close";
 import { InputField } from "../atoms/InputField";
 import { AddBtn } from "../atoms/AddBtn";
 
@@ -18,6 +22,7 @@ export const TextFieldMaterial = memo((props) => {
     name: "",
     amount: "",
   });
+  const [isAlert, setIsAlert] = useState(true);
 
   const handleAddFormChange = (event) => {
     event.preventDefault();
@@ -33,6 +38,10 @@ export const TextFieldMaterial = memo((props) => {
 
   const handleAddFormSubmit = (event) => {
     event.preventDefault();
+
+    if (addFormData.name === "" || addFormData.amount === "") {
+      return setIsAlert(!isAlert);
+    }
 
     const newMaterial = {
       name: addFormData.name,
@@ -93,6 +102,31 @@ export const TextFieldMaterial = memo((props) => {
             </Table>
           </TableContainer>
         </Box>
+
+        <Snackbar
+          anchorOrigin={{ vertical: "top", horizontal: "center" }}
+          open={isAlert}
+          autoHideDuration={3000}
+        >
+          <Alert
+            variant="filled"
+            severity="error"
+            action={
+              <IconButton
+                aria-label="close"
+                color="inherit"
+                size="small"
+                onClick={() => {
+                  setIsAlert(false);
+                }}
+              >
+                <CloseIcon fontSize="inherit" />
+              </IconButton>
+            }
+          >
+            入力してください
+          </Alert>
+        </Snackbar>
 
         <Box display="flex">
           <Box>
