@@ -10,12 +10,21 @@ class CreateUserView(generics.CreateAPIView):
     permission_classes = (AllowAny,)
 
 
+class MyProfileView(generics.RetrieveUpdateAPIView):
+    serializer_class = UserSerializer
+
+    def get_object(self):
+        return self.request.user
+
+
 class RecipeViewSet(viewsets.ModelViewSet):
     queryset = Recipe.objects.all()
     serializer_class = RecipeSerializer
+    filter_fields = ('user', 'liked', 'isDisplayed')
 
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
+
 
 class MyPageViewSet(viewsets.ModelViewSet):
     queryset = MyPage.objects.all()
@@ -24,9 +33,11 @@ class MyPageViewSet(viewsets.ModelViewSet):
     def perform_create(self, serializer):
         serializer.save(userPage=self.request.user)
 
+
 class ProcessViewSet(viewsets.ModelViewSet):
-    queryset = Process.objects.all()
+    queryset = Process.objects.all().order_by('order')
     serializer_class = ProcessSerializer
+
 
 class MaterialViewSet(viewsets.ModelViewSet):
     queryset = Material.objects.all()

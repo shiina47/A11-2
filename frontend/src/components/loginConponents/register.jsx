@@ -16,11 +16,6 @@ export default function Register() {
   const onChangeConPassword = (event) => setConPass(event.target.value);
 
   const onClickRegister = () => {
-    console.log({
-      email: email,
-      password: pass,
-      password_confirmation: conPass,
-    });
     register({
       email: email,
       password: pass,
@@ -29,12 +24,22 @@ export default function Register() {
   };
 
   return (
-    <Box
-      sx={{ display: "flex", alignItems: "center", flexDirection: "column" }}
+    <Box sx={{
+      display: "flex",
+      alignItems: "center",
+      flexDirection: "column",
+      width: "100%"
+      }}
     >
       <h1 style={{ fontSize: "50px" }}>Reciper</h1>
       <h3>ユーザー登録</h3>
-      <Box>
+      <Box sx={{
+        display: "flex",
+        alignItems: "center",
+        flexDirection: "column",
+        width: "100%"
+        }}
+      >
         <TextField
           sx={{ margin: "8px" }}
           fullWidth

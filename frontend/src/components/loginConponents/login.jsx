@@ -14,17 +14,26 @@ export default function Login() {
   const onChangePassword = (event) => setPassword(event.target.value);
 
   const onClickLogin = () => {
-    console.log({ email: mail, password: password });
     login({ email: mail, password: password });
   };
 
   return (
-    <Box
-      sx={{ display: "flex", alignItems: "center", flexDirection: "column" }}
+    <Box sx={{      
+      display: "flex",
+      alignItems: "center",
+      flexDirection: "column",
+      width: "100%"
+      }}
     >
       <h1 style={{ fontSize: "50px" }}>Reciper</h1>
       <h3>ログイン</h3>
-      <Box>
+      <Box sx={{          
+        display: "flex",
+        alignItems: "center",
+        flexDirection: "column",
+        width: "100%"
+        }}
+      >
         <TextField
           sx={{ margin: "8px" }}
           fullWidth

@@ -16,28 +16,10 @@ class UserSerializer(serializers.ModelSerializer):
 
 class MyPageSerializer(serializers.ModelSerializer):
 
-    created_at = serializers.DateTimeField(format="%Y-%m-%d", read_only=True)
-
     class Meta:
         model = MyPage
-        fields = '__all__'
+        fields = ('name', 'image', 'userPage')
         extra_kwargs = {'userPage': {'read_only': True}}
-
-
-class RecipeSerializer(serializers.ModelSerializer):
-
-    created_at = serializers.DateTimeField(format="%Y-%m-%d", read_only=True)
-    updated_at = serializers.DateTimeField(format="%Y-%m-%d", read_only=True)
-
-    material = serializers.StringRelatedField(many=True)
-    process = serializers.StringRelatedField(many=True)
-
-    class Meta:
-        model = Recipe
-
-        extra_kwargs = {'user': {'read_only': True}}
-        fields = ('id', 'title', 'cost', 'amount', 'minutes', 'image', 'user', 'liked',
-                  'created_at', 'updated_at', 'material', 'process')
 
 
 class ProcessSerializer(serializers.ModelSerializer):
@@ -52,3 +34,26 @@ class MaterialSerializer(serializers.ModelSerializer):
     class Meta:
         model = Material
         fields = ('id', 'name', 'amount', 'recipe')
+
+
+class RecipeSerializer(serializers.ModelSerializer):
+
+    created_at = serializers.DateTimeField(format="%Y-%m-%d", read_only=True)
+    updated_at = serializers.DateTimeField(format="%Y-%m-%d", read_only=True)
+
+    material = serializers.StringRelatedField(many=True)
+    process = ProcessSerializer(many=True, read_only=True)
+
+    class Meta:
+        model = Recipe
+
+        extra_kwargs = {'user': {'read_only': True}}
+        fields = ('id', 'title', 'cost', 'amount', 'minutes', 'image', 'user', 'liked', 'isDisplayed',
+                  'created_at', 'updated_at', 'material', 'process')
+
+    def create(self, validated_data):
+        processes_data = validated_data.pop('process')
+        recipe = Recipe.objects.create(**validated_data)
+        for process_data in processes_data:
+            Process.objects.create(album=album, **process_data)
+        return recipe

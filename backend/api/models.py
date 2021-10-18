@@ -73,6 +73,7 @@ class Recipe(models.Model):
                               upload_to=upload_recipe_path)
     liked = models.ManyToManyField(
         settings.AUTH_USER_MODEL, related_name='liked', blank=True)
+    isDisplayed = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now_add=True)
     user = models.ForeignKey(settings.AUTH_USER_MODEL,
