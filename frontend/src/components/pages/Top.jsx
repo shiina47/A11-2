@@ -12,6 +12,9 @@ export const Top = memo(() => {
   const toRecipes = () => {
     history.push("/recipes");
   };
+  const toLogIn = () => {
+    history.push("/auth");
+  };
 
   return (
     <>
@@ -63,6 +66,9 @@ export const Top = memo(() => {
             </Button>
             <Button variant="contained" sx={{ marginBottom: "8px" , width: "60%" }} onClick={toRecipes} >
               レシピを見つける
+            </Button>
+            <Button variant="contained" sx={{ marginBottom: "8px" , width: "60%" }} onClick={toLogIn} >
+              ログイン
             </Button>
           </Box>
         </Box>
