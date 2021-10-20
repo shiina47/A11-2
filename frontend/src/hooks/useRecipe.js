@@ -6,8 +6,10 @@ export const useRecipe = () => {
   const [myRecipes, setMyRecipes] = useState([]);
   const [selectedRecipe, setSelectedRecipe] = useState(undefined);
   const [myLikedRecipes, setMyLikedRecipes] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   const getMyRecipes = useCallback(async () => {
+    setLoading(true);
     const res = await axios.get("http://127.0.0.1:8000/api/myself/", {
       headers: {
         "Content-Type": "application/json",
@@ -65,7 +67,8 @@ export const useRecipe = () => {
           Authorization: `JWT ${localStorage.localJWT}`,
         },
       })
-      .then((res) => setMyLikedRecipes(res.data));
+      .then((res) => setMyLikedRecipes(res.data))
+      .finally(() => setLoading(false));
   });
 
   const createRecipe = useCallback(async (data) => {
@@ -97,5 +100,6 @@ export const useRecipe = () => {
     myLikedRecipes,
     getSelectedRecipe,
     selectedRecipe,
+    loading,
   };
 };
