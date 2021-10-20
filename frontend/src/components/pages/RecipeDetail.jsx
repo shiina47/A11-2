@@ -37,16 +37,19 @@ export const RecipeDetail = memo(() => {
         marginBottom: "50px",
       }}
     >
-      <Typography alignSelf="start" m={2} fontWeight="bold" variant="h5">
-        {selectedRecipe && selectedRecipe.title}
-      </Typography>
-      <Box>
+      <SRecipeTitle>
+        <Typography fontWeight="bold" p={1} color="white" variant="h5">
+          {selectedRecipe && selectedRecipe.title}
+        </Typography>
+      </SRecipeTitle>
+
+      <Box boxShadow={3} borderRadius={3} height="400px" width="360px">
         <SImg src={selectedRecipe && selectedRecipe.image} alt="料理" />
       </Box>
 
       <Box
         width="100%"
-        marginTop="5px"
+        marginTop="10px"
         display="flex"
         justifyContent="space-between"
       >
@@ -62,10 +65,17 @@ export const RecipeDetail = memo(() => {
   );
 });
 
+const SRecipeTitle = styled.div`
+  margin: 15px 0;
+  width: 370px;
+  height: 40px;
+  background-color: #ff9800;
+  border-radius: 10px;
+`;
+
 const SImg = styled.img`
-  height: 400px;
-  width: 360px;
+  height: 100%;
+  width: 100%;
   object-fit: cover;
   border-radius: 10px;
-  margin: 2px;
 `;

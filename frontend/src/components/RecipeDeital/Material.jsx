@@ -8,7 +8,13 @@ export const Material = memo((props) => {
   return (
     <>
       <Box width="100%" marginTop="5px">
-        <Typography m={2} fontWeight="bold" variant="h6">
+        <Typography
+          m={2}
+          fontWeight="bold"
+          variant="h6"
+          borderBottom={4}
+          borderColor="orange"
+        >
           材料(1人前)
         </Typography>
         {materials &&
