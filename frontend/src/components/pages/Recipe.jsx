@@ -41,6 +41,7 @@ const Recipe = memo((props) => {
     material,
     process,
     liked,
+    isDisplayed,
     onClickLike,
     onClickDislike,
   } = props;
@@ -107,13 +108,13 @@ const Recipe = memo((props) => {
         <CardActions disableSpacing>
           <IconButton
             aria-label="add to favorites"
-            onClick={() => onClickDislike(recipeId)}
+            onClick={() => onClickDislike(recipeId, isDisplayed)}
           >
             <CancelIcon />
           </IconButton>
           <IconButton
             aria-label="add to favorites"
-            onClick={() => onClickLike(recipeId, liked)}
+            onClick={() => onClickLike(recipeId, liked, isDisplayed)}
           >
             <FavoriteIcon />
           </IconButton>
