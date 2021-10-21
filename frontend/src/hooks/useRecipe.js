@@ -69,7 +69,7 @@ export const useRecipe = () => {
       })
       .then((res) => setMyLikedRecipes(res.data))
       .finally(() => setLoading(false));
-  });
+  }, []);
 
   const createRecipe = useCallback(async (data) => {
     const uploadData = new FormData();
