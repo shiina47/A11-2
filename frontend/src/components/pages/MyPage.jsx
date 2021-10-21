@@ -21,8 +21,11 @@ export const MyPage = memo(() => {
   const history = useHistory();
 
   useEffect(() => {
-    getMyRecipes();
-    getMyLikedRecipes();
+    const myPageRecipes = async () => {
+      await getMyRecipes();
+      await getMyLikedRecipes();
+    };
+    myPageRecipes();
   }, []);
 
   return (
@@ -39,9 +42,8 @@ export const MyPage = memo(() => {
             justifyContent="center"
             alignItems="center"
           >
-            <TitleDiv>投稿したレシピ</TitleDiv>
-
             <Box width="370px">
+              <TitleDiv>投稿したレシピ</TitleDiv>
               {myRecipes.map((myRecipe) => {
                 return (
                   <SListBox
@@ -53,7 +55,7 @@ export const MyPage = memo(() => {
                       })
                     }
                   >
-                    <Box boxShadow={3} borderRadius={3} height="100px">
+                    <Box height="100px">
                       <SImg src={myRecipe && myRecipe.image} alt="料理" />
                     </Box>
 
@@ -83,9 +85,8 @@ export const MyPage = memo(() => {
             justifyContent="center"
             alignItems="center"
           >
-            <TitleDiv>お気に入りのレシピ</TitleDiv>
-
             <Box width="370px">
+              <TitleDiv>お気に入りのレシピ</TitleDiv>
               {myLikedRecipes.map((myLikedRecipe) => {
                 return (
                   <SListBox
@@ -97,7 +98,7 @@ export const MyPage = memo(() => {
                       })
                     }
                   >
-                    <Box boxShadow={3} borderRadius={3} height="100px">
+                    <Box height="100px">
                       <SImg
                         src={myLikedRecipe && myLikedRecipe.image}
                         alt="料理"
@@ -142,6 +143,7 @@ const SListBox = styled.div`
   cursor: pointer;
   display: flex;
   margin: 10px;
+  box-shadow: 5px 10px 15px -5px rgba(0, 0, 0, 0.2), 0 0 2px rgba(0, 0, 0, 0.15);
 `;
 
 const SImg = styled.img`
