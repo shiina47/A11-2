@@ -143,61 +143,62 @@ export const RecipeDisplay = memo(() => {
 
   return (
     <>
-      <button onClick={() => Reset()}>reset</button>
+      <div>
+        <button onClick={() => Reset()}>reset</button>
+        <SRootDiv>
+          <SAppDiv>
+            <SCardContainer>
+              {recipes.map((recipe) => {
+                return (
+                  <TinderCard
+                    className="swipe"
+                    preventSwipe={["up", "down"]}
+                    onSwipe={(dir) => swiped(dir, recipe)}
+                    key={recipe.id}
+                  >
+                    <SCard>
+                      <SCardContent>
+                        <Box
+                          height="380px"
+                          width="340px"
+                          boxShadow={4}
+                          borderRadius={3}
+                          marginTop="10px"
+                        >
+                          <SImg src={recipe.image} alt="image" />
+                        </Box>
 
-      <SRootDiv>
-        <SAppDiv>
-          <SCardContainer>
-            {recipes.map((recipe) => {
-              return (
-                <TinderCard
-                  className="swipe"
-                  preventSwipe={["up", "down"]}
-                  onSwipe={(dir) => swiped(dir, recipe)}
-                  key={recipe.id}
-                >
-                  <SCard>
-                    <SCardContent>
-                      <Box
-                        height="300px"
-                        width="300px"
-                        boxShadow={4}
-                        borderRadius={3}
-                        marginTop="10px"
-                      >
-                        <SImg src={recipe.image} alt="image" />
-                      </Box>
-
-                      <h3>{recipe.title}</h3>
-                      <RecipeInfo
-                        likes_count={recipe.likes_count}
-                        minutes={recipe.minutes}
-                        cost={recipe.cost}
-                      />
-                    </SCardContent>
-                  </SCard>
-                </TinderCard>
-              );
-            })}
-          </SCardContainer>
-        </SAppDiv>
-      </SRootDiv>
-      <SDetailDiv>
-        <SBtn
-          onClick={() => {
-            setNowRecipe(recipes[recipes.length - count]);
-            setIsDetail(!isDetail);
-          }}
-        >
-          {isDetail ? "閉じる" : "詳細を見る"}
-        </SBtn>
-        {isDetail ? (
-          <SDetailContents>
-            <Material materials={nowRecipe && nowRecipe.material} />
-            <ProcesseHome processes={nowRecipe && nowRecipe.process} />
-          </SDetailContents>
-        ) : null}
-      </SDetailDiv>
+                        <h3>{recipe.title}</h3>
+                        <RecipeInfo
+                          likes_count={recipe.likes_count}
+                          minutes={recipe.minutes}
+                          cost={recipe.cost}
+                        />
+                      </SCardContent>
+                    </SCard>
+                  </TinderCard>
+                );
+              })}
+            </SCardContainer>
+          </SAppDiv>
+        </SRootDiv>
+        <SDetailDiv>
+          <SBtn
+            onClick={() => {
+              setNowRecipe(recipes[recipes.length - count]);
+              setIsDetail(!isDetail);
+            }}
+          >
+            {isDetail ? "閉じる" : "詳細を見る"}
+          </SBtn>
+          {isDetail ? (
+            <SDetailContents>
+              <Material materials={nowRecipe && nowRecipe.material} />
+              <ProcesseHome processes={nowRecipe && nowRecipe.process} />
+            </SDetailContents>
+          ) : null}
+        </SDetailDiv>
+      </div>
     </>
   );
 });
@@ -207,8 +208,9 @@ const SRootDiv = styled.div`
   display: flex;
   justify-content: center;
   width: 100vw;
-  height: 450px;
+  height: 500px;
   overflow: hidden;
+  margin-top: 20px;
   > div {
     display: flex;
     flex-direction: column;
@@ -225,8 +227,8 @@ const SAppDiv = styled.div`
 `;
 
 const SImg = styled.img`
-  height: 300px;
-  width: 300px;
+  height: 380px;
+  width: 340px;
   object-fit: cover;
   border-radius: 10px;
 `;
@@ -241,8 +243,8 @@ const SCardContainer = styled.div`
 const SCard = styled.div`
   background-color: rgb(255, 255, 255);
   box-shadow: 0px 0px 15px 0px rgba(34, 34, 34, 0.3);
-  min-width: 320px;
-  height: 400px;
+  min-width: 350px;
+  height: 500px;
   border-radius: 20px;
   background-size: cover;
   background-position: center;
@@ -260,6 +262,7 @@ const SDetailDiv = styled.div`
   display: flex;
   justify-content: center;
   flex-direction: column;
+  margin-top: 30px;
 `;
 
 const SBtn = styled.button`
@@ -281,9 +284,9 @@ const SBtn = styled.button`
 
 const SDetailContents = styled.div`
   width: 320px;
-  margin: 0 auto;
+  margin: 10px auto 10px;
   min-width: 320px;
+  border: 4px solid #f1a619;
   border-radius: 20px;
-  background-color: white;
   margin-bottom: 50px;
 `;
