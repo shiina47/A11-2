@@ -8,11 +8,27 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
+import Drawer from '@material-ui/core/Drawer';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
 
 export const Header = memo(() => {
   const history = useHistory();
   const toLogIn = () => {
     history.push("/auth");
+  };
+  const toPost = () => {
+    history.push("/post");
+  };
+  const toRecipes = () => {
+    history.push("/recipes");
+  };
+  const toMyPage = () => {
+    history.push("/mypage");
+  };
+  const [drawerOpen, setDrawerOpen] = React.useState(false);
+  const handleDrawerToggle = () => {
+    setDrawerOpen(!drawerOpen); // Drawer の開閉状態を反転
   };
 
   return (
@@ -25,6 +41,7 @@ export const Header = memo(() => {
             color="inherit"
             aria-label="menu"
             sx={{ mr: 2 }}
+            onClick={handleDrawerToggle}
           >
             <MenuIcon />
           </IconButton>
@@ -41,6 +58,23 @@ export const Header = memo(() => {
           </Button>
         </Toolbar>
       </AppBar>
+      <Drawer
+        variant="temporary"
+        open={drawerOpen}
+        onClose={handleDrawerToggle}
+      >
+        <List>
+          <ListItem>
+            <Button onClick={toPost}>レシピを投稿する</Button>
+          </ListItem>
+          <ListItem>
+            <Button onClick={toRecipes}>レシピを見つける</Button>
+          </ListItem>
+          <ListItem>
+            <Button onClick={toMyPage}>マイページ</Button>
+          </ListItem>
+        </List>
+      </Drawer>
     </Box>
   );
 });

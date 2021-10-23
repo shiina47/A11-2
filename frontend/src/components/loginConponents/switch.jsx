@@ -24,7 +24,7 @@ export default function Switch() {
       >
         {(() => {
           /*  switchLoginがfalseであれば登録画面（ユーザー登録）を表示 */
-          if (switchLogin === false) {
+          if (switchLogin === true) {
             return (
               <Box sx={{ width: "100%" }}>
                 <Register />
