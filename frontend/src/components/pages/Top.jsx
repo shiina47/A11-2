@@ -3,6 +3,7 @@ import { useHistory } from "react-router-dom";
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 import img from "../../img/photo-1490645935967-10de6ba17061.jpeg";
+import { LoginModal } from "../modal/LoginModal";
 
 export const Top = memo(() => {
   const history = useHistory();
@@ -15,12 +16,13 @@ export const Top = memo(() => {
 
   return (
     <>
-      <Box sx={{
-        display: "flex",　
-        justifyContent: "center" , 
-        backgroundImage: `url(${img})` , 
-        backgroundSize:"cover" , 
-        height:"calc(100vh - 64px)"
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          backgroundImage: `url(${img})`,
+          backgroundSize: "cover",
+          height: "calc(100vh - 64px)",
         }}
       >
         <Box
@@ -36,7 +38,7 @@ export const Top = memo(() => {
               display: "flex",
               alignItems: "center",
               flexDirection: "column",
-              margin: "40px 0 136px 0"
+              margin: "40px 0 136px 0",
             }}
           >
             <h1 style={{ color: "white", fontSize: "48px" }}>Reciper</h1>
@@ -51,7 +53,7 @@ export const Top = memo(() => {
               width: "100%",
               display: "flex",
               alignItems: "center",
-              flexDirection: "column"
+              flexDirection: "column",
             }}
           >
             <Button
@@ -61,9 +63,14 @@ export const Top = memo(() => {
             >
               レシピを投稿する
             </Button>
-            <Button variant="contained" sx={{ marginBottom: "8px" , width: "60%" }} onClick={toRecipes} >
+            <Button
+              variant="contained"
+              sx={{ marginBottom: "8px", width: "60%" }}
+              onClick={toRecipes}
+            >
               レシピを見つける
             </Button>
+            <LoginModal />
           </Box>
         </Box>
       </Box>

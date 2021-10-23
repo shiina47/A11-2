@@ -19,7 +19,7 @@ export const PrimaryBtn = memo((props) => {
 const SPrimaryBtn = styled.div`
   display: flex;
   justify-content: center;
-  width: 300px;
+  width: 200px;
   height: 20px;
   margin: 0 auto;
   padding: 10px;
