@@ -64,7 +64,7 @@ export const Post = memo(() => {
 
   return (
     <>
-      <Box my={4} mx="auto" width={370}>
+      <Box my={4} mx="auto" width="375px">
         <TitleDiv>レシピ投稿</TitleDiv>
 
         <Box paddingX={2}>

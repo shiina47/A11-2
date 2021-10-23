@@ -2,8 +2,21 @@ import { memo } from "react";
 
 import { Box, Typography } from "@mui/material";
 
-export const Processes = memo((props) => {
+export const ProcesseHome = memo((props) => {
   const { processes } = props;
+
+  const compare = (a, b) => {
+    const orderA = a.order;
+    const orderB = b.order;
+
+    let comparison = 0;
+    if (orderA > orderB) {
+      comparison = 1;
+    } else if (orderA < orderB) {
+      comparison = -1;
+    }
+    return comparison;
+  };
 
   return (
     <>
@@ -19,7 +32,7 @@ export const Processes = memo((props) => {
         </Typography>
         <Box display="flex" justifyContent="center" flexDirection="column">
           {processes &&
-            processes.map((process, index) => {
+            processes.sort(compare).map((process, index) => {
               return (
                 <Box key={index}>
                   <Typography

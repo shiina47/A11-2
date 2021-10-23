@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { memo, useEffect } from "react";
 import { useHistory } from "react-router-dom";
-import { Box, Typography } from "@mui/material";
+import { Box, Typography, CircularProgress } from "@mui/material";
 
 import styled from "styled-components";
 
@@ -10,92 +10,122 @@ import { TitleDiv } from "../atoms/TitleDiv";
 import { RecipeInfo } from "../MyPage/RecipeInfo";
 
 export const MyPage = memo(() => {
-  const { getMyRecipes, myRecipes, getMyLikedRecipes, myLikedRecipes } =
-    useRecipe();
+  const {
+    getMyRecipes,
+    myRecipes,
+    getMyLikedRecipes,
+    myLikedRecipes,
+    loading,
+  } = useRecipe();
 
   const history = useHistory();
 
   useEffect(() => {
-    getMyRecipes();
-    getMyLikedRecipes();
+    const myPageRecipes = async () => {
+      await getMyRecipes();
+      await getMyLikedRecipes();
+    };
+    myPageRecipes();
   }, []);
 
   return (
-    <Box width="90%" mx="auto">
-      <Box
-        display="flex"
-        flexDirection="column"
-        justifyContent="center"
-        alignItems="center"
-      >
-        <TitleDiv>投稿したレシピ</TitleDiv>
-
-        <Box width="370px">
-          {myRecipes.map((myRecipe) => {
-            return (
-              <SListBox
-                key={myRecipe.id}
-                onClick={() =>
-                  history.push({
-                    pathname: "/detail",
-                    state: { id: myRecipe.id },
-                  })
-                }
-              >
-                <SImg src={myRecipe && myRecipe.image} alt="料理" />
-                <SRecipeBox>
-                  <Typography variant="body1" fontWeight="bold" marginTop="5px">
-                    {myRecipe.title}
-                  </Typography>
-                  <RecipeInfo
-                    likes_count={myRecipe.likes_count}
-                    minutes={myRecipe.minutes}
-                    cost={myRecipe.cost}
-                  />
-                </SRecipeBox>
-              </SListBox>
-            );
-          })}
+    <>
+      {loading ? (
+        <Box display="flex" justifyContent="center">
+          <CircularProgress />
         </Box>
-      </Box>
+      ) : (
+        <Box width="90%" mx="auto">
+          <Box
+            display="flex"
+            flexDirection="column"
+            justifyContent="center"
+            alignItems="center"
+          >
+            <Box width="370px">
+              <TitleDiv>投稿したレシピ</TitleDiv>
+              {myRecipes.map((myRecipe) => {
+                return (
+                  <SListBox
+                    key={myRecipe.id}
+                    onClick={() =>
+                      history.push({
+                        pathname: "/detail",
+                        state: { id: myRecipe.id },
+                      })
+                    }
+                  >
+                    <Box height="100px">
+                      <SImg src={myRecipe && myRecipe.image} alt="料理" />
+                    </Box>
 
-      <Box
-        display="flex"
-        flexDirection="column"
-        justifyContent="center"
-        alignItems="center"
-      >
-        <TitleDiv>お気に入りのレシピ</TitleDiv>
+                    <SRecipeBox>
+                      <Typography
+                        variant="body1"
+                        fontWeight="bold"
+                        marginTop="5px"
+                      >
+                        {myRecipe.title}
+                      </Typography>
+                      <RecipeInfo
+                        likes_count={myRecipe.likes_count}
+                        minutes={myRecipe.minutes}
+                        cost={myRecipe.cost}
+                      />
+                    </SRecipeBox>
+                  </SListBox>
+                );
+              })}
+            </Box>
+          </Box>
 
-        <Box width="370px">
-          {myLikedRecipes.map((myLikedRecipe) => {
-            return (
-              <SListBox
-                key={myLikedRecipe.id}
-                onClick={() =>
-                  history.push({
-                    pathname: "/detail",
-                    state: { id: myLikedRecipe.id },
-                  })
-                }
-              >
-                <SImg src={myLikedRecipe && myLikedRecipe.image} alt="料理" />
-                <SRecipeBox>
-                  <Typography variant="body1" fontWeight="bold" marginTop="5px">
-                    {myLikedRecipe.title}
-                  </Typography>
-                  <RecipeInfo
-                    likes_count={myLikedRecipe.likes_count}
-                    minutes={myLikedRecipe.minutes}
-                    cost={myLikedRecipe.cost}
-                  />
-                </SRecipeBox>
-              </SListBox>
-            );
-          })}
+          <Box
+            display="flex"
+            flexDirection="column"
+            justifyContent="center"
+            alignItems="center"
+          >
+            <Box width="370px">
+              <TitleDiv>お気に入りのレシピ</TitleDiv>
+              {myLikedRecipes.map((myLikedRecipe) => {
+                return (
+                  <SListBox
+                    key={myLikedRecipe.id}
+                    onClick={() =>
+                      history.push({
+                        pathname: "/detail",
+                        state: { id: myLikedRecipe.id },
+                      })
+                    }
+                  >
+                    <Box height="100px">
+                      <SImg
+                        src={myLikedRecipe && myLikedRecipe.image}
+                        alt="料理"
+                      />
+                    </Box>
+                    <SRecipeBox>
+                      <Typography
+                        variant="body1"
+                        fontWeight="bold"
+                        marginTop="5px"
+                      >
+                        {myLikedRecipe.title}
+                      </Typography>
+                      <RecipeInfo
+                        likes_count={myLikedRecipe.likes_count}
+                        minutes={myLikedRecipe.minutes}
+                        cost={myLikedRecipe.cost}
+                      />
+                    </SRecipeBox>
+                  </SListBox>
+                );
+              })}
+            </Box>
+          </Box>
         </Box>
-      </Box>
-    </Box>
+      )}
+    </>
   );
 });
 
@@ -113,6 +143,7 @@ const SListBox = styled.div`
   cursor: pointer;
   display: flex;
   margin: 10px;
+  box-shadow: 5px 10px 15px -5px rgba(0, 0, 0, 0.2), 0 0 2px rgba(0, 0, 0, 0.15);
 `;
 
 const SImg = styled.img`
@@ -120,5 +151,4 @@ const SImg = styled.img`
   width: 100px;
   object-fit: cover;
   border-radius: 10px;
-  margin: 2px;
 `;
