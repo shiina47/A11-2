@@ -1,28 +1,17 @@
 import { memo } from "react";
-import { useHistory } from "react-router-dom";
-import Button from "@mui/material/Button";
-import Box from "@mui/material/Box";
-import img from "../../img/photo-1490645935967-10de6ba17061.jpeg";
+import { Box, Typography } from "@mui/material";
 import { LoginModal } from "../modal/LoginModal";
 
 export const Top = memo(() => {
-  const history = useHistory();
-  const toPost = () => {
-    history.push("/post");
-  };
-  const toRecipes = () => {
-    history.push("/recipes");
-  };
-
   return (
     <>
       <Box
         sx={{
           display: "flex",
           justifyContent: "center",
-          backgroundImage: `url(${img})`,
           backgroundSize: "cover",
-          height: "calc(100vh - 64px)",
+          backgroundColor: "white",
+          height: "100vh",
         }}
       >
         <Box
@@ -38,15 +27,29 @@ export const Top = memo(() => {
               display: "flex",
               alignItems: "center",
               flexDirection: "column",
-              margin: "40px 0 136px 0",
+              margin: "80px 0 0 0",
             }}
           >
-            <h1 style={{ color: "white", fontSize: "48px" }}>Reciper</h1>
-            <p style={{ color: "white", letterSpacing: "4px" }}>
-              早いレシピを
+            <Typography
+              fontWeight="bold"
+              variant="h4"
+              color="text.primary"
+              // textAlign="center"
+              letterSpacing="4px"
+            >
+              簡単なレシピで
               <br />
-              早く見つける
-            </p>
+              料理を楽しもう
+            </Typography>
+            <Typography
+              fontWeight="bold"
+              variant="body1"
+              color="text.primary"
+              marginTop={8}
+              marginX="16px"
+            >
+              Reciperは簡単な料理だけを共有するサービスです。あなたの料理を投稿してみんなに見てもらおう！
+            </Typography>
           </Box>
           <Box
             sx={{
@@ -54,22 +57,9 @@ export const Top = memo(() => {
               display: "flex",
               alignItems: "center",
               flexDirection: "column",
+              marginTop: "32px",
             }}
           >
-            <Button
-              variant="contained"
-              sx={{ marginBottom: "8px", width: "60%" }}
-              onClick={toPost}
-            >
-              レシピを投稿する
-            </Button>
-            <Button
-              variant="contained"
-              sx={{ marginBottom: "8px", width: "60%" }}
-              onClick={toRecipes}
-            >
-              レシピを見つける
-            </Button>
             <LoginModal />
           </Box>
         </Box>

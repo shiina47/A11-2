@@ -1,22 +1,21 @@
 import { memo } from "react";
 import { useHistory } from "react-router-dom";
 import * as React from "react";
-import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
-import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
-import Drawer from '@material-ui/core/Drawer';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
+import Drawer from "@material-ui/core/Drawer";
+import List from "@material-ui/core/List";
+import ListItem from "@material-ui/core/ListItem";
+import { grey } from "@mui/material/colors";
+
+import styled from "styled-components";
 
 export const Header = memo(() => {
   const history = useHistory();
-  const toLogIn = () => {
-    history.push("/auth");
-  };
+
   const toPost = () => {
     history.push("/post");
   };
@@ -32,32 +31,29 @@ export const Header = memo(() => {
   };
 
   return (
-    <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static" color="secondary">
-        <Toolbar>
+    <Box>
+      <SHeader>
+        <Box display="flex" justifyContent="space-between">
+          <Typography
+            variant="h6"
+            alignSelf="center"
+            marginLeft="20px"
+            fontWeight="bold"
+            color="white"
+          >
+            Reciper
+          </Typography>
           <IconButton
             size="large"
             edge="start"
-            color="inherit"
             aria-label="menu"
             sx={{ mr: 2 }}
             onClick={handleDrawerToggle}
           >
-            <MenuIcon />
+            <MenuIcon sx={{ color: grey[50] }} />
           </IconButton>
-          <Typography
-            variant="h6"
-            component="div"
-            sx={{ flexGrow: 1 }}
-            align="center"
-          >
-            Reciper
-          </Typography>
-          <Button color="inherit" onClick={toLogIn}>
-            ログイン
-          </Button>
-        </Toolbar>
-      </AppBar>
+        </Box>
+      </SHeader>
       <Drawer
         variant="temporary"
         open={drawerOpen}
@@ -65,16 +61,35 @@ export const Header = memo(() => {
       >
         <List>
           <ListItem>
-            <Button onClick={toPost}>レシピを投稿する</Button>
+            <Button
+              onClick={toPost}
+              sx={{ color: grey[900], fontWeight: "bold" }}
+            >
+              レシピを投稿する
+            </Button>
           </ListItem>
           <ListItem>
-            <Button onClick={toRecipes}>レシピを見つける</Button>
+            <Button
+              onClick={toRecipes}
+              sx={{ color: grey[900], fontWeight: "bold" }}
+            >
+              レシピを見つける
+            </Button>
           </ListItem>
           <ListItem>
-            <Button onClick={toMyPage}>マイページ</Button>
+            <Button
+              onClick={toMyPage}
+              sx={{ color: grey[900], fontWeight: "bold" }}
+            >
+              マイページ
+            </Button>
           </ListItem>
         </List>
       </Drawer>
     </Box>
   );
 });
+
+const SHeader = styled.div`
+  background-color: #ff9800;
+`;

@@ -1,8 +1,8 @@
 import { memo, useState } from "react";
 import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
 import Modal from "@mui/material/Modal";
 import { LoginModalForm } from "../loginConponents/LoginModalForm";
+import { PrimaryBtn } from "../atoms/PrimaryBtn";
 
 export const LoginModal = memo(() => {
   const [open, setOpen] = useState(false);
@@ -24,7 +24,7 @@ export const LoginModal = memo(() => {
   return (
     <>
       <div>
-        <Button onClick={handleOpen}>Open modal</Button>
+        <PrimaryBtn onClick={handleOpen}>ログイン・新規登録</PrimaryBtn>
         <Modal
           open={open}
           onClose={handleClose}
