@@ -13,9 +13,6 @@ export const Top = memo(() => {
   const toRecipes = () => {
     history.push("/recipes");
   };
-  const toLogIn = () => {
-    history.push("/auth");
-  };
 
   return (
     <>
